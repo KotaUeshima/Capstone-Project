@@ -2,7 +2,7 @@ import React from "react";
 
 const buttonStyle = {
   position: "absolute",
-  top: "1rem",
+  top: "4rem",
   right: "1rem",
   background: "none",
   border: "none",

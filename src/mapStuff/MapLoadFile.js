@@ -4,7 +4,7 @@ import { useLoadScript } from "@react-google-maps/api";
 
 function MapContainer() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBWVySINvUXOpyFm9fmQjlRdIpDVYv5wds",
+    googleMapsApiKey: process.env.REACT_APP_API_KEY,
     libraries: ["places"],
   });
 

@@ -1,8 +1,16 @@
+NPM INSTALLS
+
 npm i -S @react-google-maps/api
 
 npm install --save use-places-autocomplete
 
 npm install @reach/combobox
+
+npm install react-bootstrap bootstrap
+
+npm install react-router-dom
+
+if error run: --legacy-peer-deps
 
 Tuesday Goals:
 

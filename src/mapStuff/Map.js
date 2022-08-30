@@ -15,7 +15,7 @@ const containerStyle = {
 
 const buttonStyle = {
   position: "absolute",
-  top: "1rem",
+  top: "4rem",
   left: "1rem",
   zIndex: "10",
 };
@@ -68,7 +68,7 @@ function Map() {
         setSearch={(position) => {
           setSearch(position);
           mapRef.current?.panTo(position);
-          mapRef.current?.setZoom(12);
+          mapRef.current?.setZoom(14);
         }}
       />
       <GoogleMap

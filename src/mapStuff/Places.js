@@ -14,7 +14,7 @@ import "@reach/combobox/styles.css";
 
 const boxStyle = {
   position: "absolute",
-  top: "1rem",
+  top: "4rem",
   left: "50%",
   transform: "translateX(-50%)",
   width: "100%",
