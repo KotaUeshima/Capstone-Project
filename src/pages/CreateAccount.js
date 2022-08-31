@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useSetRecoilState } from "recoil";
-import { userState } from "../components/atoms";
 const URL = "http://localhost:3000";
 
-function Login() {
-  const setUserState = useSetRecoilState(userState);
+function CreateAccount() {
   const [formObj, setFormObj] = useState({
     username: "",
     password: "",
@@ -17,7 +14,7 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`${URL}/login`, {
+    fetch(`${URL}/users`, {
       method: "POST",
       headers: {
         Accepts: "application/json",
@@ -26,20 +23,16 @@ function Login() {
       body: JSON.stringify({ user: formObj }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        localStorage.setItem("token", data.jwt);
-      });
+      .then(console.log);
     setFormObj({
       username: "",
       password: "",
     });
   }
-
   return (
     <Container>
       <h1 className="shadow-sm text-success mt-5 p-3 text-center rounded">
-        Login
+        Create Account
       </h1>
       <Row className="mt-5">
         <Col lg={5} md={6} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
@@ -61,7 +54,7 @@ function Login() {
                 id="password"
                 value={formObj.password}
                 onChange={handleChange}
-                type="password"
+                type="text"
                 placeholder="Password"
               />
             </Form.Group>
@@ -79,4 +72,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default CreateAccount;

@@ -28,8 +28,10 @@ function NavBar() {
                   Login
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
+                <NavDropdown.Item
+                  onClick={(e) => localStorage.removeItem("token")}
+                >
+                  Logout
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>

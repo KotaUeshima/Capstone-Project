@@ -12,6 +12,17 @@ npm install react-router-dom
 
 if error run: --legacy-peer-deps
 
+Deploy Script:
+
+npm install gh-pages --save-dev
+
+"homepage": "http://kotaueshima.github.io capstone-project-frontend",
+
+"predeploy": "npm run build",
+"deploy": "gh-pages -d build",
+
+then npm run deploy
+
 Project Pitch:
 
 Have you ever wondered what somebody across the world is listening to? This project will create a global platform for users to browse and add songs based on their location. This project will utilize google maps API as well as spotify API to display user locations and song choice.
