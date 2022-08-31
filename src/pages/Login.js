@@ -1,26 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../components/atoms";
 
 function Login() {
+  const setUserState = useSetRecoilState(userState);
+  const [formObj, setFormObj] = useState({
+    username: "",
+    password: "",
+  });
+
+  console.log(formObj);
+
+  function handleChange(e) {
+    setFormObj((obj) => ({ ...obj, [e.target.id]: e.target.value }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("submitted", formObj);
+    setFormObj({
+      username: "",
+      password: "",
+    });
+  }
+
   return (
     <Container>
       <h1 className="shadow-sm text-success mt-5 p-3 text-center rounded">
-        Admin Login
+        Login
       </h1>
       <Row className="mt-5">
         <Col lg={5} md={6} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
-          <Form>
-            <Form.Group controlId="formBasicUsername">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
               <Form.Label>Username</Form.Label>
-              <Form.Control type="username" placeholder="Enter Username" />
+              <Form.Control
+                id="username"
+                value={formObj.username}
+                onChange={handleChange}
+                type="username"
+                placeholder="Enter Username"
+              />
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group className="mt-1">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control
+                id="password"
+                value={formObj.password}
+                onChange={handleChange}
+                type="password"
+                placeholder="Password"
+              />
             </Form.Group>
 
-            <Button variant="success btn-block" type="submit">
+            <Button className="mt-3" variant="success btn-block" type="submit">
               Login
             </Button>
           </Form>

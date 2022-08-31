@@ -12,10 +12,6 @@ npm install react-router-dom
 
 if error run: --legacy-peer-deps
 
-Tuesday Goals:
-
-Figure out how to display all icons on first render and keep them there, and have info boxes for each one
-
 Project Pitch:
 
 Have you ever wondered what somebody across the world is listening to? This project will create a global platform for users to browse and add songs based on their location. This project will utilize google maps API as well as spotify API to display user locations and song choice.

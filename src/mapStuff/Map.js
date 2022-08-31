@@ -100,9 +100,9 @@ function Map() {
         )} */}
         {renderMarker && (
           <InfoWindow position={center}>
-            <div style={{ zIndex: "10" }}>
-              <h1>Jay Park</h1>
-              <p>Sexy 4 Eva</p>
+            <div>
+              <h1>Drake</h1>
+              <p>Nonstop</p>
             </div>
           </InfoWindow>
         )}
@@ -126,7 +126,10 @@ function Map() {
               setSelectedIcon(null);
             }}
           >
-            <h2>JAY PARK</h2>
+            <div>
+              <h2>Drake</h2>
+              <p>Nonstop</p>
+            </div>
           </InfoWindow>
         )}
       </GoogleMap>
