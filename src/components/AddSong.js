@@ -1,30 +1,85 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Spotify from "../mapStuff/Spotify";
+import { useRecoilValue } from "recoil";
+import { userState } from "../components/atoms";
+const URL = "http://localhost:3000";
+
+const buttonStyle = {
+  position: "absolute",
+  top: "8rem",
+  left: "1rem",
+  zIndex: "10",
+};
 
 function AddSong() {
+  const recoilState = useRecoilValue(userState);
   const [show, setShow] = useState(false);
+  const [selectedTrack, setSelectedTrack] = useState("");
+  const [coords, setCoords] = useState({});
+
+  function selectTrack(track) {
+    setSelectedTrack(track);
+  }
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCoords({
+          lat: position.coords.latitude + 1,
+          lng: position.coords.longitude + 1,
+        });
+      },
+      () => null
+    );
+  }, []);
+
+  console.log(coords);
+
+  function submitSong() {
+    const songObj = {
+      title: selectedTrack.name,
+      artist: selectedTrack.artists[0].name,
+      user_id: recoilState.id,
+      lat: coords.lat,
+      lng: coords.lng,
+    };
+    fetch(`${URL}/songs`, {
+      method: "POST",
+      headers: {
+        Accepts: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(songObj),
+    })
+      .then((res) => res.json())
+      .then(console.log);
+    handleClose();
+  }
+
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" style={buttonStyle} onClick={handleShow}>
         Add Song
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Select Song</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <Spotify selectTrack={selectTrack} />
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" onClick={submitSong}>
+            Add Song to Map
           </Button>
         </Modal.Footer>
       </Modal>

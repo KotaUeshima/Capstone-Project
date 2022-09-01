@@ -7,6 +7,7 @@ import {
 } from "@react-google-maps/api";
 import Places from "./Places";
 import Locate from "./Locate";
+import AddSong from "../components/AddSong";
 const URL = "http://localhost:3000";
 
 const containerStyle = {
@@ -48,6 +49,7 @@ function Map() {
       <button style={buttonStyle} onClick={() => mapRef.current?.panTo(center)}>
         Return Home
       </button>
+      <AddSong />
       <Places
         setSearch={(position) => {
           setSearch(position);

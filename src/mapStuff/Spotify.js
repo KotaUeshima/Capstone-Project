@@ -11,11 +11,10 @@ import {
 const CLIENT_ID = "40ff9b6a103d498382bd8bf9b1809896";
 const CLIENT_SECRET = "8d09d4624e7244d19648bc1c729eb71e";
 
-function Spotify() {
+function Spotify({ selectTrack }) {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [tracks, setTracks] = useState([]);
-  const [selectedTrack, setSelectedTrack] = useState("");
 
   useEffect(() => {
     var authParameters = {
@@ -47,7 +46,9 @@ function Spotify() {
     };
 
     var track = await fetch(
-      "https://api.spotify.com/v1/search?q=" + searchInput + "&type=track",
+      "https://api.spotify.com/v1/search?q=" +
+        searchInput +
+        "&type=track&limit=5",
       searchParameters
     )
       .then((res) => res.json())
@@ -57,7 +58,7 @@ function Spotify() {
   }
 
   function handleSelect(track) {
-    setSelectedTrack(track);
+    selectTrack(track);
   }
 
   return (
