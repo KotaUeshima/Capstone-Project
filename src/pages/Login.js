@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../components/atoms";
+import { useNavigate } from "react-router-dom";
 const URL = "http://localhost:3000";
 
 function Login() {
@@ -10,6 +11,7 @@ function Login() {
     username: "",
     password: "",
   });
+  let navigate = useNavigate();
 
   function handleChange(e) {
     setFormObj((obj) => ({ ...obj, [e.target.id]: e.target.value }));
@@ -27,13 +29,17 @@ function Login() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setUserState({
+          username: data.user.username,
+          id: data.user.id,
+        });
+        setFormObj({
+          username: "",
+          password: "",
+        });
         localStorage.setItem("token", data.jwt);
+        navigate("/map");
       });
-    setFormObj({
-      username: "",
-      password: "",
-    });
   }
 
   return (

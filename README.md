@@ -23,6 +23,22 @@ npm install gh-pages --save-dev
 
 then npm run deploy
 
+API:
+
+https://developer.spotify.com/
+#downloaded but not sure how to use yet
+npm i react-spotify-web-playback
+
+Things to do:
+
+- explore spotify API
+- create fake data in seeds file and set relationships for models and endpoints on API
+- connect models to markers, so request to all markers and display on map, get all songs
+- also allow users to create a song and based on location, click a button open a modal form, allow input song title and song artist, and will create a new song instance which belongs to that user, and that song will also belong to a new location instance
+
+- maybe just one model for song title and artist lang and lat because they are so specific
+- however, later on bigger locations table for cities or areas, that will include a range of points
+
 Project Pitch:
 
 Have you ever wondered what somebody across the world is listening to? This project will create a global platform for users to browse and add songs based on their location. This project will utilize google maps API as well as spotify API to display user locations and song choice.
