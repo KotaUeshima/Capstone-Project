@@ -31,8 +31,8 @@ function Locate({ setSearch }) {
       }}
     >
       <img
-        src="https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg"
-        alt="compass"
+        src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/location-arrow-512.png"
+        alt="my location"
         style={imageStyle}
       />
     </button>

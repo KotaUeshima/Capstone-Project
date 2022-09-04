@@ -20,13 +20,9 @@ function GetCurrentUser() {
             id: data.user.id,
           });
         });
-      } else {
-        console.log("nobody is logged in");
       }
     });
   }, []);
-
-  console.log(recoilUserState);
 
   return <></>;
 }

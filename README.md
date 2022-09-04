@@ -31,13 +31,13 @@ npm i react-spotify-web-playback
 
 Things to do:
 
-- explore spotify API
-- create fake data in seeds file and set relationships for models and endpoints on API
-- connect models to markers, so request to all markers and display on map, get all songs
-- also allow users to create a song and based on location, click a button open a modal form, allow input song title and song artist, and will create a new song instance which belongs to that user, and that song will also belong to a new location instance
-
-- maybe just one model for song title and artist lang and lat because they are so specific
-- however, later on bigger locations table for cities or areas, that will include a range of points
+- Add song images to database so cards for display looks better, maybe add a display area for when you click a marker not just info window
+- Fix UI for modal form and selecting track, so selected track will be the only on display, and maybe have it more like a dropdown
+- Maybe add a feature where you can play song when you click on it on browser where a card displays
+- Make better fake data to keep track of users maybe reset database and restart
+- Change mcdonalds logo and find better logo for markers
+- Think about UI design for map page
+- Fix lat and long rounding, messes up current location
 
 Project Pitch:
 

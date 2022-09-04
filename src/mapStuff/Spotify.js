@@ -4,9 +4,10 @@ import {
   InputGroup,
   FormControl,
   Button,
-  Row,
-  Card,
+  ListGroupItem,
+  ListGroup,
 } from "react-bootstrap";
+import SpotifyPlayer from "react-spotify-web-playback";
 
 const CLIENT_ID = "40ff9b6a103d498382bd8bf9b1809896";
 const CLIENT_SECRET = "8d09d4624e7244d19648bc1c729eb71e";
@@ -45,20 +46,16 @@ function Spotify({ selectTrack }) {
       },
     };
 
-    var track = await fetch(
+    var trackGetter = await fetch(
       "https://api.spotify.com/v1/search?q=" +
         searchInput +
-        "&type=track&limit=5",
+        "&type=track&limit=20",
       searchParameters
     )
       .then((res) => res.json())
       .then((data) => {
         setTracks(data.tracks.items);
       });
-  }
-
-  function handleSelect(track) {
-    selectTrack(track);
   }
 
   return (
@@ -79,20 +76,30 @@ function Spotify({ selectTrack }) {
           <Button onClick={search}>Search</Button>
         </InputGroup>
       </Container>
-      <Container>
-        <Row className="mx-2 row row-cols-4">
+      <Container style={{ overflow: "auto", height: "50vh" }}>
+        <ListGroup>
           {tracks.map((track, i) => {
             return (
-              <Card key={i} onClick={() => handleSelect(track)}>
-                <Card.Img src={track.album.images[0].url} />
-                <Card.Body>
-                  <Card.Title>{track.name}</Card.Title>
-                  <p>{track.artists[0].name}</p>
-                </Card.Body>
-              </Card>
+              <ListGroup.Item
+                as="li"
+                className="d-flex justify-content-between align-items-start"
+                onClick={(e) => {
+                  let listItem = e.target;
+                  while (listItem.nodeName != "LI") {
+                    listItem = listItem.parentNode;
+                  }
+                  listItem.style.backgroundColor = "#00FFFF";
+                  selectTrack(track);
+                }}
+              >
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold">{track.name}</div>
+                  {track.artists[0].name}
+                </div>
+              </ListGroup.Item>
             );
           })}
-        </Row>
+        </ListGroup>
       </Container>
     </>
   );

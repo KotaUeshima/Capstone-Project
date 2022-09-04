@@ -30,23 +30,28 @@ function AddSong() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setCoords({
-          lat: position.coords.latitude + 1,
-          lng: position.coords.longitude + 1,
+          lat: position.coords.latitude - 1,
+          lng: position.coords.longitude - 1,
         });
       },
       () => null
     );
   }, []);
 
-  console.log(coords);
-
   function submitSong() {
     const songObj = {
       title: selectedTrack.name,
       artist: selectedTrack.artists[0].name,
       user_id: recoilState.id,
+      image_url: selectedTrack.album.images[0].url,
       lat: coords.lat,
       lng: coords.lng,
+      spotify_url: `${selectedTrack.external_urls.spotify.substring(
+        0,
+        25
+      )}embed/${selectedTrack.external_urls.spotify.substring(
+        25
+      )}?utm_source=generator`,
     };
     fetch(`${URL}/songs`, {
       method: "POST",
@@ -66,7 +71,6 @@ function AddSong() {
       <Button variant="primary" style={buttonStyle} onClick={handleShow}>
         Add Song
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Select Song</Modal.Title>
