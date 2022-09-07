@@ -10,7 +10,8 @@ import Locate from "./Locate";
 import AddSong from "./AddSong";
 import { Card, Button, ButtonGroup } from "react-bootstrap";
 import { AiFillHome } from "react-icons/ai";
-import SelectedSongCard from "../components/SelectedSongCard";
+import ThemeProvider from "react-bootstrap/ThemeProvider";
+
 import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
 
@@ -35,7 +36,8 @@ const buttonStyle = {
 const spotifyPlayStyle = {
   zIndex: "10",
   position: "absolute",
-  bottom: "0rem",
+  right: "1rem",
+  top: "4rem",
 };
 
 const center = { lat: 39.8283, lng: -98.5795 };
@@ -58,6 +60,10 @@ function Map() {
 
   const mapRef = useRef(/** @type google.maps.GoogleMap */);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
+
+  function addSongToPage(data) {
+    setSongs((songs) => [...songs, data]);
+  }
 
   // const scatter = () =>
   //   new ScatterplotLayer({
@@ -92,6 +98,7 @@ function Map() {
           onClick={() => {
             mapRef.current?.panTo(center);
             mapRef.current?.setZoom(5);
+            setSelectedIcon(null);
           }}
         >
           <AiFillHome />
@@ -101,9 +108,12 @@ function Map() {
             setSearch(position);
             mapRef.current?.panTo(position);
             mapRef.current?.setZoom(14);
+            setSelectedIcon(null);
           }}
         />
-        {recoilState.username ? <AddSong /> : null}
+        {recoilState.username ? (
+          <AddSong addSongToPage={addSongToPage} />
+        ) : null}
       </ButtonGroup>
       <Places
         setSearch={(position) => {
@@ -117,6 +127,7 @@ function Map() {
         center={center}
         zoom={5}
         options={{
+          mapId: "2f1759f08238137f",
           disableDefaultUI: true,
           clickableIcons: false,
         }}
@@ -134,7 +145,10 @@ function Map() {
                     }
                     position={{ lat: song.lat, lng: song.lng }}
                     clusterer={clusterer}
-                    onClick={() => setSelectedIcon(song)}
+                    onClick={() => {
+                      mapRef.current?.panTo({ lat: song.lat, lng: song.lng });
+                      setSelectedIcon(song);
+                    }}
                     icon={{
                       url: "https://cdn3.iconfinder.com/data/icons/map-markers-1/512/music-512.png",
                       scaledSize: new window.google.maps.Size(30, 30),
@@ -154,22 +168,24 @@ function Map() {
               setSelectedIcon(null);
             }}
           >
-            <Card style={{ width: "10rem" }}>
-              <Card.Img variant="top" src={selectedIcon.image_url} />
-              <Card.Body>
-                <Card.Title>{selectedIcon.title}</Card.Title>
-                <Card.Text>{selectedIcon.artist}</Card.Text>
-              </Card.Body>
-            </Card>
+            <>
+              <Card>
+                {/* <Card.Img variant="top" src={selectedIcon.image_url} /> */}
+                <Card.Body>
+                  <Card.Text>
+                    {selectedIcon.title} - {selectedIcon.artist}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </>
           </InfoWindow>
         )}
-        <SelectedSongCard selectedIcon={selectedIcon} />
       </GoogleMap>
       {selectedIcon && (
         <iframe
           style={spotifyPlayStyle}
           src={selectedIcon.spotify_url}
-          width="100%"
+          width="30%"
           height="20%"
           frameBorder="2"
           allowfullscreen="true"

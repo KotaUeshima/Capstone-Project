@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
 const URL = "http://localhost:3000";
 
-function AddSong() {
+function AddSong({ addSongToPage }) {
   const recoilState = useRecoilValue(userState);
   const [show, setShow] = useState(false);
   const [selectedTrack, setSelectedTrack] = useState("");
@@ -56,7 +56,9 @@ function AddSong() {
       body: JSON.stringify(songObj),
     })
       .then((res) => res.json())
-      .then(console.log);
+      .then((data) => {
+        addSongToPage(data);
+      });
     handleClose();
   }
 

@@ -34,13 +34,15 @@ function NavBar() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="justify-content-end" style={{ width: "100%" }}>
+            <Nav className="justfy-content-start">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
               <Nav.Link as={Link} to="/map">
                 Map
               </Nav.Link>
+            </Nav>
+            <Nav className="justify-content-end" style={{ width: "100%" }}>
               <NavDropdown title={dropDownTitle} id="basic-nav-dropdown">
                 {recoilState.username ? (
                   <NavDropdown.Item onClick={handleLogout}>
