@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Button, Image } from "react-bootstrap";
+import { useRecoilValue } from "recoil";
+import { userState } from "../components/atoms";
 
 function Landing() {
+  const recoilState = useRecoilValue(userState);
+
   return (
     <div
       style={{
@@ -23,13 +27,15 @@ function Landing() {
       >
         <Container style={{ width: "40%", marginRight: "50%" }}>
           <h1 style={{ fontSize: "6rem" }}>Globify</h1>
-          <h3>Listen to music from around the world.</h3>
-          <Link to="/login">
-            <Button>Login</Button>
-          </Link>
+          <h3 className="mb-3">Listen to music from around the world.</h3>
           <Link to="/map">
-            <Button className="m-3">See Map</Button>
+            <Button>See Map</Button>
           </Link>
+          {recoilState.username ? null : (
+            <Link to="/login">
+              <Button className="m-3">Login</Button>
+            </Link>
+          )}
         </Container>
         <Image
           style={{ marginRight: "50px" }}

@@ -7,3 +7,10 @@ export const userState = atom({
     id: "",
   },
 });
+
+export const showSidebar = atom({
+  key: "sidebar",
+  default: {
+    show: false,
+  },
+});

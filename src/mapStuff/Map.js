@@ -10,7 +10,7 @@ import Locate from "./Locate";
 import AddSong from "./AddSong";
 import { Card, Button, ButtonGroup } from "react-bootstrap";
 import { AiFillHome } from "react-icons/ai";
-import ThemeProvider from "react-bootstrap/ThemeProvider";
+import Sidebar from "../components/Sidebar.js";
 
 import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
@@ -36,8 +36,8 @@ const buttonStyle = {
 const spotifyPlayStyle = {
   zIndex: "10",
   position: "absolute",
-  right: "1rem",
-  top: "4rem",
+  left: "1rem",
+  bottom: "1rem",
 };
 
 const center = { lat: 39.8283, lng: -98.5795 };
@@ -63,6 +63,12 @@ function Map() {
 
   function addSongToPage(data) {
     setSongs((songs) => [...songs, data]);
+  }
+
+  function goToSelectedSong(song) {
+    mapRef.current?.panTo({ lat: song.lat, lng: song.lng });
+    mapRef.current?.setZoom(10);
+    setSelectedIcon(song);
   }
 
   // const scatter = () =>
@@ -120,6 +126,7 @@ function Map() {
           setSearch(position);
           mapRef.current?.panTo(position);
           mapRef.current?.setZoom(10);
+          setSelectedIcon(null);
         }}
       />
       <GoogleMap
@@ -132,6 +139,7 @@ function Map() {
           clickableIcons: false,
         }}
         onLoad={onLoad}
+        onClick={() => setSelectedIcon(null)}
       >
         {renderMarker && (
           <>
@@ -192,6 +200,7 @@ function Map() {
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         ></iframe>
       )}
+      <Sidebar goToSelectedSong={goToSelectedSong} />
     </>
   );
 }

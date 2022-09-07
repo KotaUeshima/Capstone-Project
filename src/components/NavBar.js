@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useRecoilState } from "recoil";
-import { userState } from "../components/atoms";
+import { userState, showSidebar } from "../components/atoms";
 
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -11,6 +11,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 function NavBar() {
   const [recoilState, setUserState] = useRecoilState(userState);
+  const [show, setShow] = useRecoilState(showSidebar);
   let navigate = useNavigate();
 
   function handleLogout() {
@@ -53,6 +54,11 @@ function NavBar() {
                     Login
                   </NavDropdown.Item>
                 )}
+                {recoilState.username && window.location.pathname == "/map" ? (
+                  <NavDropdown.Item onClick={() => setShow(true)}>
+                    MyPost
+                  </NavDropdown.Item>
+                ) : null}
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

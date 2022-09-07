@@ -16,6 +16,8 @@ npm install --save react-map-gl mapbox-gl
 
 (i don't know if this is correct but npm install deck.gl)
 
+npm install react-bootstrap-sidebar-menu
+
 if error run: --legacy-peer-deps
 
 MapBox:
@@ -41,8 +43,8 @@ npm i react-spotify-web-playback
 
 Things to do:
 
-- work on maps overlay, to render thousands of data points better with deck.gl, maybe look at mapbox a lil bit as well
-- figure deck.gl and then maybe
+- figure out deck.gl, try to be able to render 10,000 data points
+- my songs sidebar list, if you click on list component, it will take you to that marker
 
 Project Pitch:
 
@@ -54,7 +56,6 @@ As a user, you should be able to browse through a global map, where there will b
 
 Stretch Goals:
 
-Create user specific bitmojis on the map
 Overall counter of how many users and the number of posts they have added
 Decide (Limti one song per user at a time? to decrease unlimited posts)
 Create your own playlists based on user songs
