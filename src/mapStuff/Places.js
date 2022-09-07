@@ -17,15 +17,15 @@ const boxStyle = {
   top: "4rem",
   left: "50%",
   transform: "translateX(-50%)",
-  width: "100%",
+  width: "80%",
   maxWidth: "400px",
   zIndex: "10",
 };
 
 const inputStyle = {
   padding: "0.5rem",
-  fontSize: "1.5rem",
-  width: "100%",
+  fontSize: "1rem",
+  width: "80%",
 };
 
 function Places({ setSearch }) {
@@ -53,7 +53,7 @@ function Places({ setSearch }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}
-        placeholder="Search for a random place"
+        placeholder="Search location..."
       />
       <ComboboxPopover>
         <ComboboxList>

@@ -7,7 +7,7 @@ import {
   ListGroupItem,
   ListGroup,
 } from "react-bootstrap";
-import SpotifyPlayer from "react-spotify-web-playback";
+import { FaSearch } from "react-icons/fa";
 
 const CLIENT_ID = "40ff9b6a103d498382bd8bf9b1809896";
 const CLIENT_SECRET = "8d09d4624e7244d19648bc1c729eb71e";
@@ -63,17 +63,20 @@ function Spotify({ selectTrack }) {
       <Container>
         <InputGroup className="mb-3" size="lg">
           <FormControl
-            placeholder="Search for Song"
+            placeholder="Search Song"
             type="input"
             onKeyPress={(event) => {
               if (event.key == "Enter") {
+                search();
               }
             }}
             onChange={(event) => {
               setSearchInput(event.target.value);
             }}
           />
-          <Button onClick={search}>Search</Button>
+          <Button onClick={search}>
+            <FaSearch />
+          </Button>
         </InputGroup>
       </Container>
       <Container style={{ overflow: "auto", height: "50vh" }}>
@@ -88,7 +91,7 @@ function Spotify({ selectTrack }) {
                   while (listItem.nodeName != "LI") {
                     listItem = listItem.parentNode;
                   }
-                  listItem.style.backgroundColor = "#00FFFF";
+                  listItem.style.backgroundColor = "#EFEFEF";
                   selectTrack(track);
                 }}
               >
@@ -96,6 +99,7 @@ function Spotify({ selectTrack }) {
                   <div className="fw-bold">{track.name}</div>
                   {track.artists[0].name}
                 </div>
+                <img height="20%" width="20%" src={track.album.images[0].url} />
               </ListGroup.Item>
             );
           })}

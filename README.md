@@ -10,7 +10,17 @@ npm install react-bootstrap bootstrap
 
 npm install react-router-dom
 
+npm install react-icons --save
+
+npm install --save react-map-gl mapbox-gl
+
+(i don't know if this is correct but npm install deck.gl)
+
 if error run: --legacy-peer-deps
+
+MapBox:
+
+https://account.mapbox.com/s
 
 Deploy Script:
 
@@ -31,13 +41,8 @@ npm i react-spotify-web-playback
 
 Things to do:
 
-- Add song images to database so cards for display looks better, maybe add a display area for when you click a marker not just info window
-- Fix UI for modal form and selecting track, so selected track will be the only on display, and maybe have it more like a dropdown
-- Maybe add a feature where you can play song when you click on it on browser where a card displays
-- Make better fake data to keep track of users maybe reset database and restart
-- Change mcdonalds logo and find better logo for markers
-- Think about UI design for map page
-- Fix lat and long rounding, messes up current location
+- work on maps overlay, to render thousands of data points better with deck.gl, maybe look at mapbox a lil bit as well
+- figure deck.gl and then maybe
 
 Project Pitch:
 

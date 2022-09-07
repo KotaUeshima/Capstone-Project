@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Spotify from "../mapStuff/Spotify";
+import Spotify from "./Spotify";
+import { BsMusicPlayerFill } from "react-icons/bs";
 import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
 const URL = "http://localhost:3000";
-
-const buttonStyle = {
-  position: "absolute",
-  top: "8rem",
-  left: "1rem",
-  zIndex: "10",
-};
 
 function AddSong() {
   const recoilState = useRecoilValue(userState);
@@ -30,8 +24,8 @@ function AddSong() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setCoords({
-          lat: position.coords.latitude - 1,
-          lng: position.coords.longitude - 1,
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
         });
       },
       () => null
@@ -68,12 +62,12 @@ function AddSong() {
 
   return (
     <>
-      <Button variant="primary" style={buttonStyle} onClick={handleShow}>
-        Add Song
+      <Button variant="primary" onClick={handleShow}>
+        <BsMusicPlayerFill />
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Select Song</Modal.Title>
+          <Modal.Title>Add Song To Current Location</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Spotify selectTrack={selectTrack} />
@@ -83,7 +77,7 @@ function AddSong() {
             Close
           </Button>
           <Button variant="primary" onClick={submitSong}>
-            Add Song to Map
+            Confirm
           </Button>
         </Modal.Footer>
       </Modal>

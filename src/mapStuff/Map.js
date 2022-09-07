@@ -7,9 +7,17 @@ import {
 } from "@react-google-maps/api";
 import Places from "./Places";
 import Locate from "./Locate";
-import AddSong from "../components/AddSong";
-import { Card, Button } from "react-bootstrap";
+import AddSong from "./AddSong";
+import { Card, Button, ButtonGroup } from "react-bootstrap";
+import { AiFillHome } from "react-icons/ai";
 import SelectedSongCard from "../components/SelectedSongCard";
+import { useRecoilValue } from "recoil";
+import { userState } from "../components/atoms";
+
+import { GoogleMapsOverlay } from "@deck.gl/google-maps";
+import { Scatterplot } from "@deck.gl/layers";
+import { ScatterplotLayer } from "deck.gl";
+
 const URL = "http://localhost:3000";
 
 const containerStyle = {
@@ -33,6 +41,7 @@ const spotifyPlayStyle = {
 const center = { lat: 39.8283, lng: -98.5795 };
 
 function Map() {
+  const recoilState = useRecoilValue(userState);
   const [search, setSearch] = useState();
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [songs, setSongs] = useState([]);
@@ -50,31 +59,57 @@ function Map() {
   const mapRef = useRef(/** @type google.maps.GoogleMap */);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
+  // const scatter = () =>
+  //   new ScatterplotLayer({
+  //     id: "scatter",
+  //     data: songs,
+  //     getPosition: (d) => [d.lng, d.lat],
+  //     pickable: true,
+  //     opacity: 0.8,
+  //     stroked: true,
+  //     filled: true,
+  //     radiusScale: 6,
+  //     radiusMinPixels: 1,
+  //     radiusMaxPixels: 100,
+  //     lineWidthMinPixels: 1,
+
+  //     onHover: ({ object, x, y }) => {},
+  //     // onClick
+  //   });
+
+  // const overlay = new GoogleMapsOverlay({
+  //   layers: [scatter()],
+  // });
+
+  // overlay.setMap(mapRef.current);
+
+  // overlay.setProps (subsequent updates to the map)
+
   return (
     <>
-      <Button
-        style={buttonStyle}
-        onClick={() => {
-          mapRef.current?.panTo(center);
-          mapRef.current?.setZoom(5);
-        }}
-      >
-        Return Home
-      </Button>
-      <AddSong />
+      <ButtonGroup style={buttonStyle}>
+        <Button
+          onClick={() => {
+            mapRef.current?.panTo(center);
+            mapRef.current?.setZoom(5);
+          }}
+        >
+          <AiFillHome />
+        </Button>
+        <Locate
+          setSearch={(position) => {
+            setSearch(position);
+            mapRef.current?.panTo(position);
+            mapRef.current?.setZoom(14);
+          }}
+        />
+        {recoilState.username ? <AddSong /> : null}
+      </ButtonGroup>
       <Places
         setSearch={(position) => {
           setSearch(position);
           mapRef.current?.panTo(position);
           mapRef.current?.setZoom(10);
-        }}
-      />
-      <Locate
-        setSearch={(position) => {
-          console.log(position);
-          setSearch(position);
-          mapRef.current?.panTo(position);
-          mapRef.current?.setZoom(14);
         }}
       />
       <GoogleMap
@@ -84,7 +119,6 @@ function Map() {
         options={{
           disableDefaultUI: true,
           clickableIcons: false,
-          zoomControl: true,
         }}
         onLoad={onLoad}
       >
