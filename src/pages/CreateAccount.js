@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { errorSelector } from "recoil";
 const URL = "http://localhost:3000";
 
 function CreateAccount() {
@@ -8,27 +9,64 @@ function CreateAccount() {
     username: "",
     password: "",
   });
+  const [errors, setErrors] = useState({});
 
   function handleChange(e) {
     setFormObj((obj) => ({ ...obj, [e.target.id]: e.target.value }));
+    if (!!errors[e.target.id])
+      setErrors({
+        ...errors,
+        [e.target.id]: null,
+      });
   }
+
+  const findFormErrors = () => {
+    const { username, password } = formObj;
+    const newErrors = {};
+    if (!username || username === "") newErrors.username = "Cannot be blank!";
+    if (!password || password === "") newErrors.password = ["Cannot be blank!"];
+    return newErrors;
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`${URL}/users`, {
-      method: "POST",
-      headers: {
-        Accepts: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user: formObj }),
-    })
-      .then((res) => res.json())
-      .then(console.log);
-    setFormObj({
-      username: "",
-      password: "",
-    });
+
+    const newErrors = findFormErrors();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      fetch(`${URL}/users`, {
+        method: "POST",
+        headers: {
+          Accepts: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user: formObj }),
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then(() => {
+            setFormObj({
+              username: "",
+              password: "",
+            });
+          });
+        } else {
+          res.json().then((data) => {
+            const validationObj = {};
+            data.errors.map((error) => {
+              if (error == "Username has already been taken") {
+                validationObj.username = error;
+              } else if (!validationObj.password) {
+                validationObj.password = [error];
+              } else {
+                validationObj.password = [...validationObj.password, error];
+              }
+            });
+            setErrors(validationObj);
+          });
+        }
+      });
+    }
   }
 
   const backgroundImage =
@@ -58,20 +96,27 @@ function CreateAccount() {
             >
               Create Account
             </h1>
-            <Form onSubmit={handleSubmit}>
+            <Form noValidate onSubmit={handleSubmit}>
               <Form.Group className="my-4">
                 <Form.Control
                   id="username"
                   value={formObj.username}
                   onChange={handleChange}
                   type="username"
-                  placeholder="Enter Username"
+                  placeholder="Create Username"
                   className="p-3"
                   style={{
                     boxShadow: "none",
                     fontWeight: "600",
                   }}
+                  isInvalid={!!errors.username}
                 />
+                <Form.Control.Feedback
+                  style={{ color: "#ff385c" }}
+                  type="Invalid"
+                >
+                  {errors.username}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="my-4">
@@ -79,10 +124,22 @@ function CreateAccount() {
                   id="password"
                   value={formObj.password}
                   onChange={handleChange}
-                  placeholder="Password"
+                  placeholder="Create Password"
                   className="p-3"
                   style={{ boxShadow: "none", fontWeight: "600" }}
+                  isInvalid={!!errors.password}
                 />
+                {errors.password &&
+                  errors.password.map((error) => {
+                    return (
+                      <Form.Control.Feedback
+                        style={{ color: "#ff385c" }}
+                        type="Invalid"
+                      >
+                        {error}
+                      </Form.Control.Feedback>
+                    );
+                  })}
               </Form.Group>
 
               <Button

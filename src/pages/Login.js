@@ -16,35 +16,62 @@ function Login() {
 
   function handleChange(e) {
     setFormObj((obj) => ({ ...obj, [e.target.id]: e.target.value }));
+    if (!!errors[e.target.id])
+      setErrors({
+        ...errors,
+        [e.target.id]: null,
+      });
   }
+
+  const findFormErrors = () => {
+    const { username, password } = formObj;
+    const newErrors = {};
+    if (!username || username === "") newErrors.username = "Cannot be blank!";
+    if (!password || password === "") newErrors.password = "Cannot be blank!";
+    return newErrors;
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    fetch(`${URL}/login`, {
-      method: "POST",
-      headers: {
-        Accepts: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user: formObj }),
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((data) => {
-          setUserState({
-            username: data.user.username,
-            id: data.user.id,
+    const newErrors = findFormErrors();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      fetch(`${URL}/login`, {
+        method: "POST",
+        headers: {
+          Accepts: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user: formObj }),
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then((data) => {
+            setUserState({
+              username: data.user.username,
+              id: data.user.id,
+            });
+            setFormObj({
+              username: "",
+              password: "",
+            });
+            localStorage.setItem("token", data.jwt);
+            navigate("/map");
           });
-          setFormObj({
-            username: "",
-            password: "",
+        } else {
+          res.json().then((data) => {
+            if (data.error === "Invalid password") {
+              setErrors({
+                password: data.error,
+              });
+            } else {
+              setErrors({ username: data.error });
+            }
           });
-          localStorage.setItem("token", data.jwt);
-          navigate("/map");
-        });
-      } else {
-      }
-    });
+        }
+      });
+    }
   }
 
   const backgroundImage =
@@ -92,7 +119,10 @@ function Login() {
                   }}
                   isInvalid={!!errors.username}
                 />
-                <Form.Control.Feedback type="Invalid">
+                <Form.Control.Feedback
+                  style={{ color: "#ff385c" }}
+                  type="Invalid"
+                >
                   {errors.username}
                 </Form.Control.Feedback>
               </Form.Group>
@@ -106,7 +136,14 @@ function Login() {
                   placeholder="Password"
                   className="p-3"
                   style={{ boxShadow: "none", fontWeight: "600" }}
+                  isInvalid={!!errors.password}
                 />
+                <Form.Control.Feedback
+                  style={{ color: "#ff385c" }}
+                  type="Invalid"
+                >
+                  {errors.password}
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Button
