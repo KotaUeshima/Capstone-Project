@@ -57,14 +57,17 @@ function AddSong({ addSongToPage }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        addSongToPage(data);
+        addSongToPage(data, { lat: coords.lat, lng: coords.lng });
       });
     handleClose();
   }
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        style={{ backgroundColor: "#ff385c", borderColor: "#ff385c" }}
+        onClick={handleShow}
+      >
         <BsMusicPlayerFill />
       </Button>
       <Modal show={show} onHide={handleClose}>

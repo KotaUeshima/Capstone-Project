@@ -14,7 +14,7 @@ npm install react-icons --save
 
 npm install --save react-map-gl mapbox-gl
 
-(i don't know if this is correct but npm install deck.gl)
+npm install deck.gl
 
 npm install react-bootstrap-sidebar-menu
 
@@ -44,7 +44,10 @@ npm i react-spotify-web-playback
 Things to do:
 
 - figure out deck.gl, try to be able to render 10,000 data points
-- my songs sidebar list, if you click on list component, it will take you to that marker
+- create login page, and create account, + validations for creating an account
+- add second part to landing page
+- have rotating globe on landing page
+- random songs
 
 Project Pitch:
 

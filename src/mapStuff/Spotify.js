@@ -16,6 +16,7 @@ function Spotify({ selectTrack }) {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [tracks, setTracks] = useState([]);
+  const [selectedSongForColor, setSelectedSongForColor] = useState(null);
 
   useEffect(() => {
     var authParameters = {
@@ -63,7 +64,7 @@ function Spotify({ selectTrack }) {
       <Container>
         <InputGroup className="mb-3" size="lg">
           <FormControl
-            placeholder="Search Song"
+            placeholder="Search Song/Artist"
             type="input"
             onKeyPress={(event) => {
               if (event.key == "Enter") {
@@ -85,6 +86,10 @@ function Spotify({ selectTrack }) {
             return (
               <ListGroup.Item
                 as="li"
+                style={{
+                  backgroundColor:
+                    track == selectedSongForColor ? "#EFEFEF" : "white",
+                }}
                 className="d-flex justify-content-between align-items-start"
                 onClick={(e) => {
                   let listItem = e.target;
@@ -92,8 +97,10 @@ function Spotify({ selectTrack }) {
                     listItem = listItem.parentNode;
                   }
                   listItem.style.backgroundColor = "#EFEFEF";
+                  setSelectedSongForColor(track);
                   selectTrack(track);
                 }}
+                key={track.external_urls}
               >
                 <div className="ms-2 me-auto">
                   <div className="fw-bold">{track.name}</div>

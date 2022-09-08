@@ -44,7 +44,11 @@ function NavBar() {
               </Nav.Link>
             </Nav>
             <Nav className="justify-content-end" style={{ width: "100%" }}>
-              <NavDropdown title={dropDownTitle} id="basic-nav-dropdown">
+              <NavDropdown
+                align="end"
+                title={dropDownTitle}
+                id="basic-nav-dropdown"
+              >
                 {recoilState.username ? (
                   <NavDropdown.Item onClick={handleLogout}>
                     Logout
@@ -56,7 +60,7 @@ function NavBar() {
                 )}
                 {recoilState.username && window.location.pathname == "/map" ? (
                   <NavDropdown.Item onClick={() => setShow(true)}>
-                    MyPost
+                    My Songs
                   </NavDropdown.Item>
                 ) : null}
               </NavDropdown>

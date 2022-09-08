@@ -61,8 +61,10 @@ function Map() {
   const mapRef = useRef(/** @type google.maps.GoogleMap */);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
-  function addSongToPage(data) {
+  function addSongToPage(data, location) {
     setSongs((songs) => [...songs, data]);
+    mapRef.current?.panTo(location);
+    mapRef.current?.setZoom(14);
   }
 
   function goToSelectedSong(song) {
@@ -106,6 +108,7 @@ function Map() {
             mapRef.current?.setZoom(5);
             setSelectedIcon(null);
           }}
+          style={{ backgroundColor: "#ff385c", borderColor: "#ff385c" }}
         >
           <AiFillHome />
         </Button>

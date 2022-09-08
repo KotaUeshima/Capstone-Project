@@ -10,22 +10,24 @@ import {
 import { ListGroup } from "react-bootstrap";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState, showSidebar } from "../components/atoms";
-import { IoIosArrowDropleftCircle } from "react-icons/io";
 const URL = "http://localhost:3000";
 
 function Sidebar({ goToSelectedSong }) {
   const [show, setShow] = useRecoilState(showSidebar);
   const recoilState = useRecoilValue(userState);
   const [mySongs, setMySongs] = useState([]);
+  const [selectedSongForColor, setSelectedSongForColor] = useState(null);
 
   useEffect(() => {
     fetch(`${URL}/user_songs/${recoilState.id}`).then((res) => {
       if (res.ok) {
         res.json().then(setMySongs);
+      } else {
+        console.log("Could not find my songs");
       }
     });
     setShow(false);
-  }, []);
+  }, [recoilState]);
 
   return (
     <>
@@ -41,9 +43,12 @@ function Sidebar({ goToSelectedSong }) {
             overflow: "scroll initial",
           }}
         >
-          <CDBSidebar textColor="#fff" backgroundColor="#333">
+          <CDBSidebar textColor="#fff" backgroundColor="#212529">
             <CDBSidebarHeader
-              onClick={() => setShow(false)}
+              onClick={() => {
+                setSelectedSongForColor(null);
+                setShow(false);
+              }}
               prefix={<i className="fa fa-bars fa-large"></i>}
             >
               {`${recoilState.username}'s songs`}
@@ -54,16 +59,24 @@ function Sidebar({ goToSelectedSong }) {
                   {mySongs.map((song) => {
                     return (
                       <ListGroup.Item
+                        style={{
+                          backgroundColor:
+                            song == selectedSongForColor
+                              ? "#ff385c"
+                              : "#212529",
+                        }}
                         as="li"
-                        className="d-flex justify-content-between align-items-start"
+                        className="d-flex justify-content-between align-items-start p-3"
                         onClick={(e) => {
                           let listItem = e.target;
                           while (listItem.nodeName != "LI") {
                             listItem = listItem.parentNode;
                           }
-                          listItem.style.backgroundColor = "#EFEFEF";
+                          listItem.style.backgroundColor = "#ff385c";
+                          setSelectedSongForColor(song);
                           goToSelectedSong(song);
                         }}
+                        key={song.external_urls}
                       >
                         <div className="ms-2 me-auto">
                           <div className="fw-bold">{song.title}</div>
