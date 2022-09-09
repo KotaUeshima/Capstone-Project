@@ -1,13 +1,28 @@
 {
   "files": {
-    "main.css": "/capstone-project-frontend/static/css/main.e1f8a7ad.css",
-    "main.js": "/capstone-project-frontend/static/js/main.16f8e678.js",
-    "index.html": "/capstone-project-frontend/index.html",
-    "main.e1f8a7ad.css.map": "/capstone-project-frontend/static/css/main.e1f8a7ad.css.map",
-    "main.16f8e678.js.map": "/capstone-project-frontend/static/js/main.16f8e678.js.map"
+    "main.css": "/Capstone-Project-Frontend/static/css/main.02bc6801.css",
+    "main.js": "/Capstone-Project-Frontend/static/js/main.46bfb471.js",
+    "static/media/fa-solid-900.svg": "/Capstone-Project-Frontend/static/media/fa-solid-900.7a8b4f130182d19a2d7c.svg",
+    "static/media/fa-brands-400.svg": "/Capstone-Project-Frontend/static/media/fa-brands-400.2f517e09eb2ca6650ff5.svg",
+    "static/media/fa-solid-900.eot": "/Capstone-Project-Frontend/static/media/fa-solid-900.9bbb245e67a133f6e486.eot",
+    "static/media/fa-solid-900.ttf": "/Capstone-Project-Frontend/static/media/fa-solid-900.be9ee23c0c6390141475.ttf",
+    "static/media/fa-regular-400.svg": "/Capstone-Project-Frontend/static/media/fa-regular-400.4689f52cc96215721344.svg",
+    "static/media/fa-brands-400.eot": "/Capstone-Project-Frontend/static/media/fa-brands-400.23f19bb08961f37aaf69.eot",
+    "static/media/fa-brands-400.ttf": "/Capstone-Project-Frontend/static/media/fa-brands-400.527940b104eb2ea366c8.ttf",
+    "static/media/fa-solid-900.woff": "/Capstone-Project-Frontend/static/media/fa-solid-900.eeccf4f66002c6f2ba24.woff",
+    "static/media/fa-brands-400.woff": "/Capstone-Project-Frontend/static/media/fa-brands-400.2285773e6b4b172f07d9.woff",
+    "static/media/fa-solid-900.woff2": "/Capstone-Project-Frontend/static/media/fa-solid-900.1551f4f60c37af51121f.woff2",
+    "static/media/fa-brands-400.woff2": "/Capstone-Project-Frontend/static/media/fa-brands-400.d878b0a6a1144760244f.woff2",
+    "static/media/fa-regular-400.eot": "/Capstone-Project-Frontend/static/media/fa-regular-400.77206a6bb316fa0aded5.eot",
+    "static/media/fa-regular-400.ttf": "/Capstone-Project-Frontend/static/media/fa-regular-400.491974d108fe4002b2aa.ttf",
+    "static/media/fa-regular-400.woff": "/Capstone-Project-Frontend/static/media/fa-regular-400.bb58e57c48a3e911f15f.woff",
+    "static/media/fa-regular-400.woff2": "/Capstone-Project-Frontend/static/media/fa-regular-400.7a3337626410ca2f4071.woff2",
+    "index.html": "/Capstone-Project-Frontend/index.html",
+    "main.02bc6801.css.map": "/Capstone-Project-Frontend/static/css/main.02bc6801.css.map",
+    "main.46bfb471.js.map": "/Capstone-Project-Frontend/static/js/main.46bfb471.js.map"
   },
   "entrypoints": [
-    "static/css/main.e1f8a7ad.css",
-    "static/js/main.16f8e678.js"
+    "static/css/main.02bc6801.css",
+    "static/js/main.46bfb471.js"
   ]
 }
