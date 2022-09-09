@@ -1,7 +1,7 @@
 {
   "name": "final",
   "version": "0.1.0",
-  "homepage": "http://kotaueshima.github.io/capstone-project-frontend",
+  "homepage": "http://KotaUeshima.github.io/Capstone-Project-Frontend",
   "private": true,
   "dependencies": {
     "@reach/combobox": "^0.17.0",

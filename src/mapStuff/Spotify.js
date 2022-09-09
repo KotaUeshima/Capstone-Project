@@ -10,7 +10,7 @@ import {
 import { FaSearch } from "react-icons/fa";
 
 const CLIENT_ID = "40ff9b6a103d498382bd8bf9b1809896";
-const CLIENT_SECRET = "8d09d4624e7244d19648bc1c729eb71e";
+const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_API_KEY;
 
 function Spotify({ selectTrack }) {
   const [searchInput, setSearchInput] = useState("");
@@ -100,7 +100,7 @@ function Spotify({ selectTrack }) {
                   setSelectedSongForColor(track);
                   selectTrack(track);
                 }}
-                key={track.external_urls}
+                key={Math.random(5) + 1}
               >
                 <div className="ms-2 me-auto">
                   <div className="fw-bold">{track.name}</div>

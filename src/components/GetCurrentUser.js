@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { userState } from "./atoms";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-const URL = "http://localhost:3000";
+
+import URL from "./URL.js";
 
 function GetCurrentUser() {
   const setUserState = useSetRecoilState(userState);

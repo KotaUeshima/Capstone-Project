@@ -5,7 +5,7 @@ import Spotify from "./Spotify";
 import { BsMusicPlayerFill } from "react-icons/bs";
 import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
-const URL = "http://localhost:3000";
+import URL from "../components/URL.js";
 
 function AddSong({ addSongToPage }) {
   const recoilState = useRecoilValue(userState);

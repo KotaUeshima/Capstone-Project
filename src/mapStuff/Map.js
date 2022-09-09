@@ -19,7 +19,7 @@ import { GoogleMapsOverlay } from "@deck.gl/google-maps";
 import { Scatterplot } from "@deck.gl/layers";
 import { ScatterplotLayer } from "deck.gl";
 
-const URL = "http://localhost:3000";
+import URL from "../components/URL.js";
 
 const containerStyle = {
   width: "100vw",
@@ -151,8 +151,8 @@ function Map() {
                 songs.map((song) => (
                   <Marker
                     key={
-                      song.lat * song.lng * (Math.random() + 1) +
-                      Math.random(10)
+                      song.lat * song.lng * (Math.random(5) + 1) +
+                      Math.random(100)
                     }
                     position={{ lat: song.lat, lng: song.lng }}
                     clusterer={clusterer}

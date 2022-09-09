@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { errorSelector } from "recoil";
-const URL = "http://localhost:3000";
+import { Link, useNavigate } from "react-router-dom";
+import URL from "../components/URL.js";
 
 function CreateAccount() {
   const [formObj, setFormObj] = useState({
@@ -10,6 +9,7 @@ function CreateAccount() {
     password: "",
   });
   const [errors, setErrors] = useState({});
+  let navigate = useNavigate();
 
   function handleChange(e) {
     setFormObj((obj) => ({ ...obj, [e.target.id]: e.target.value }));
@@ -49,6 +49,7 @@ function CreateAccount() {
               username: "",
               password: "",
             });
+            navigate("/login");
           });
         } else {
           res.json().then((data) => {
@@ -86,7 +87,7 @@ function CreateAccount() {
       <Container>
         <Row className="mt-5">
           <Col
-            sm={8}
+            sm={6}
             style={{ zIndex: "10", backgroundColor: "#212529" }}
             className="p-5 m-auto shadow-sm rounded-lg"
           >
@@ -135,6 +136,7 @@ function CreateAccount() {
                       <Form.Control.Feedback
                         style={{ color: "#ff385c" }}
                         type="Invalid"
+                        key={error}
                       >
                         {error}
                       </Form.Control.Feedback>

@@ -50,16 +50,26 @@ function NavBar() {
                 id="basic-nav-dropdown"
               >
                 {recoilState.username ? (
-                  <NavDropdown.Item onClick={handleLogout}>
+                  <NavDropdown.Item
+                    style={{ textAlign: "right" }}
+                    onClick={handleLogout}
+                  >
                     Logout
                   </NavDropdown.Item>
                 ) : (
-                  <NavDropdown.Item as={Link} to="/login">
+                  <NavDropdown.Item
+                    style={{ textAlign: "right" }}
+                    as={Link}
+                    to="/login"
+                  >
                     Login
                   </NavDropdown.Item>
                 )}
                 {recoilState.username && window.location.pathname == "/map" ? (
-                  <NavDropdown.Item onClick={() => setShow(true)}>
+                  <NavDropdown.Item
+                    style={{ textAlign: "right" }}
+                    onClick={() => setShow(true)}
+                  >
                     My Songs
                   </NavDropdown.Item>
                 ) : null}

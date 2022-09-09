@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../components/atoms";
 import { useNavigate, Link } from "react-router-dom";
-const URL = "http://localhost:3000";
+import URL from "../components/URL.js";
 
 function Login() {
   const setUserState = useSetRecoilState(userState);

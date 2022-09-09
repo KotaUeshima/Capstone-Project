@@ -10,7 +10,7 @@ import {
 import { ListGroup } from "react-bootstrap";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState, showSidebar } from "../components/atoms";
-const URL = "http://localhost:3000";
+import URL from "./URL.js";
 
 function Sidebar({ goToSelectedSong }) {
   const [show, setShow] = useRecoilState(showSidebar);
