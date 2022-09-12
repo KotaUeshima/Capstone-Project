@@ -47,6 +47,7 @@ function Map() {
   const [search, setSearch] = useState();
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [songs, setSongs] = useState([]);
+  const [refresh, setRefresh] = useState(null);
 
   // used to try to get markers to render on first time and re-renders, not sure if neccesary
   const [renderMarker, setRenderMarker] = useState(null);
@@ -55,11 +56,18 @@ function Map() {
     fetch(`${URL}/songs`)
       .then((res) => res.json())
       .then(setSongs);
-    setRenderMarker(true);
+    // setRenderMarker(true);
   }, []);
 
   const mapRef = useRef(/** @type google.maps.GoogleMap */);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
+
+  // if (songs.length == 0) {
+  //   return <div>Loading...</div>;
+  // } else {
+  //   createLayer();
+  // }
+  createLayer();
 
   function addSongToPage(data, location) {
     setSongs((songs) => [...songs, data]);
@@ -73,31 +81,32 @@ function Map() {
     setSelectedIcon(song);
   }
 
-  // const scatter = () =>
-  //   new ScatterplotLayer({
-  //     id: "scatter",
-  //     data: songs,
-  //     getPosition: (d) => [d.lng, d.lat],
-  //     pickable: true,
-  //     opacity: 0.8,
-  //     stroked: true,
-  //     filled: true,
-  //     radiusScale: 6,
-  //     radiusMinPixels: 1,
-  //     radiusMaxPixels: 100,
-  //     lineWidthMinPixels: 1,
-
-  //     onHover: ({ object, x, y }) => {},
-  //     // onClick
-  //   });
-
-  // const overlay = new GoogleMapsOverlay({
-  //   layers: [scatter()],
-  // });
-
-  // overlay.setMap(mapRef.current);
-
-  // overlay.setProps (subsequent updates to the map)
+  function createLayer() {
+    const scatter = () =>
+      new ScatterplotLayer({
+        id: "scatter",
+        data: songs,
+        getPosition: (d) => [d.lng, d.lat],
+        getFillColor: () => [255, 56, 92],
+        getLineColor: () => [255, 56, 92],
+        pickable: true,
+        opacity: 0.8,
+        stroked: true,
+        filled: true,
+        radiusUnit: "common",
+        radiusScale: 10,
+        radiusMinPixels: 1,
+        radiusMaxPixels: 100,
+        lineWidthMinPixels: 1,
+        onClick: ({ object }) => {
+          setSelectedIcon(object);
+        },
+      });
+    const overlay = new GoogleMapsOverlay({
+      layers: [scatter()],
+    });
+    overlay.setMap(mapRef.current);
+  }
 
   return (
     <>
@@ -144,7 +153,7 @@ function Map() {
         onLoad={onLoad}
         onClick={() => setSelectedIcon(null)}
       >
-        {renderMarker && (
+        {/* {renderMarker && (
           <>
             <MarkerClusterer>
               {(clusterer) =>
@@ -171,7 +180,7 @@ function Map() {
               }
             </MarkerClusterer>
           </>
-        )}
+        )} */}
         {selectedIcon && (
           <InfoWindow
             position={{ lat: selectedIcon.lat, lng: selectedIcon.lng }}

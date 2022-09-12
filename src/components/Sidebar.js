@@ -23,11 +23,11 @@ function Sidebar({ goToSelectedSong }) {
       if (res.ok) {
         res.json().then(setMySongs);
       } else {
-        console.log("Could not find my songs");
+        console.log(`Could not find my songs`);
       }
     });
     setShow(false);
-  }, [recoilState]);
+  }, []);
 
   return (
     <>
@@ -55,38 +55,40 @@ function Sidebar({ goToSelectedSong }) {
             </CDBSidebarHeader>
             <CDBSidebarContent className="sidebar-content">
               <CDBSidebarMenu>
-                <div>
-                  {mySongs.map((song) => {
-                    return (
-                      <ListGroup.Item
-                        style={{
-                          backgroundColor:
-                            song == selectedSongForColor
-                              ? "#ff385c"
-                              : "#212529",
-                        }}
-                        as="li"
-                        className="d-flex justify-content-between align-items-start p-3"
-                        onClick={(e) => {
-                          let listItem = e.target;
-                          while (listItem.nodeName != "LI") {
-                            listItem = listItem.parentNode;
-                          }
-                          listItem.style.backgroundColor = "#ff385c";
-                          setSelectedSongForColor(song);
-                          goToSelectedSong(song);
-                        }}
-                        key={song.external_urls}
-                      >
-                        <div className="ms-2 me-auto">
-                          <div className="fw-bold">{song.title}</div>
-                          {song.artist}
-                        </div>
-                        <img height="20%" width="20%" src={song.image_url} />
-                      </ListGroup.Item>
-                    );
-                  })}
-                </div>
+                <>
+                  <div>
+                    {mySongs.map((song) => {
+                      return (
+                        <ListGroup.Item
+                          style={{
+                            backgroundColor:
+                              song == selectedSongForColor
+                                ? "#ff385c"
+                                : "#212529",
+                          }}
+                          as="li"
+                          className="d-flex justify-content-between align-items-start p-3"
+                          onClick={(e) => {
+                            let listItem = e.target;
+                            while (listItem.nodeName != "LI") {
+                              listItem = listItem.parentNode;
+                            }
+                            listItem.style.backgroundColor = "#ff385c";
+                            setSelectedSongForColor(song);
+                            goToSelectedSong(song);
+                          }}
+                          key={Math.random() + Math.random(10) + 10}
+                        >
+                          <div className="ms-2 me-auto">
+                            <div className="fw-bold">{song.title}</div>
+                            {song.artist}
+                          </div>
+                          <img height="20%" width="20%" src={song.image_url} />
+                        </ListGroup.Item>
+                      );
+                    })}
+                  </div>
+                </>
               </CDBSidebarMenu>
             </CDBSidebarContent>
           </CDBSidebar>

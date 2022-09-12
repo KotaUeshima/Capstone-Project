@@ -1,7 +1,7 @@
 Things to do:
 
-- figure out deployment (may need to restart)
-- figure out deck.gl, try to be able to render 10,000 data points
+- deck.gl with scatter points, on a global scale should be just a bunch of dots, show different concentraions by cities, either find data, or just focus some lat and lng in cities, when you zoom in, dots should get gradually bigger, otherwise too small when zoomed in so figure out sizing, need to figure out updating it when you add a song, just focus on the US for now as sample data, limit a user from uploading from same location
+
 - add second part to landing page (need to figure out design)
 - have rotating globe on landing page
 - random song button (click to find random song)
