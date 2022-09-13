@@ -4,6 +4,7 @@ import { Container, Button, Image } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
 import CreateAccount from "./CreateAccount";
+import SpinningGlobe from "../components/SpinningGlobe";
 
 function Landing() {
   const recoilState = useRecoilValue(userState);
@@ -57,7 +58,20 @@ function Landing() {
                   Go To Map
                 </Button>
               </Link>
-              {recoilState.username ? null : (
+              {recoilState.username ? (
+                <Button
+                  className="m-3"
+                  style={{
+                    backgroundColor: "#ff385c",
+                    borderColor: "#ff385c",
+                    width: "40%",
+                    fontWeight: "600",
+                  }}
+                  disabled
+                >
+                  Login
+                </Button>
+              ) : (
                 <Link to="/login">
                   <Button
                     className="m-3"
@@ -75,33 +89,40 @@ function Landing() {
             </div>
           </Container>
         </Container>
-        <Image
-          style={{ marginRight: "50px" }}
-          width="40%"
-          fit="cover"
-          src="https://i.pinimg.com/736x/cd/2c/fe/cd2cfe4ed7feaeaaba31b0e7b520d2c2.jpg"
-        />
+        <div
+          style={{
+            position: "absolute",
+            right: "1rem",
+            marginRight: "50px",
+            width: "50%",
+            height: "90%",
+          }}
+        >
+          <SpinningGlobe />
+        </div>
       </div>
-      <div
-        style={{
-          height: "90vh",
-          display: "flex",
-        }}
-        ref={toCreateAccount}
-      >
-        <Container className="p-2 m-auto rounded-lg">
-          <h1
-            style={{ fontSize: "4vw", fontWeight: "700" }}
-            className="text-center"
-          >
-            Create a Free Account Today
-          </h1>
-          <p className="text-center">
-            Post your music taste, for the world to see!
-          </p>
-          <CreateAccount />
-        </Container>
-      </div>
+      {recoilState.username ? null : (
+        <div
+          style={{
+            height: "90vh",
+            display: "flex",
+          }}
+          ref={toCreateAccount}
+        >
+          <Container className="p-2 m-auto rounded-lg">
+            <h1
+              style={{ fontSize: "4vw", fontWeight: "700" }}
+              className="text-center"
+            >
+              Create a Free Account Today
+            </h1>
+            <p className="text-center">
+              Post your music taste, for the world to see!
+            </p>
+            <CreateAccount />
+          </Container>
+        </div>
+      )}
     </div>
   );
 }

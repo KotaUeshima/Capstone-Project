@@ -82,6 +82,13 @@ function NavBar() {
                       My Songs
                     </NavDropdown.Item>
                   </>
+                ) : recoilState.username ? (
+                  <>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item onClick={() => setShow(true)} disabled>
+                      My Songs
+                    </NavDropdown.Item>
+                  </>
                 ) : null}
               </NavDropdown>
             </Nav>

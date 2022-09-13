@@ -18,6 +18,10 @@ npm install deck.gl
 
 npm install react-bootstrap-sidebar-menu
 
+npm install three @react-three/fiber
+
+npm install @react-three/drei
+
 if error run: --legacy-peer-deps
 
 Deploy Instructions, React on Github Pages

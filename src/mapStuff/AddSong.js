@@ -65,6 +65,7 @@ function AddSong({ addSongToPage }) {
   return (
     <>
       <Button
+        variant="dark"
         style={{ backgroundColor: "#ff385c", borderColor: "#ff385c" }}
         onClick={handleShow}
       >

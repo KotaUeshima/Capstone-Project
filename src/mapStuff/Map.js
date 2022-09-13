@@ -10,6 +10,8 @@ import Locate from "./Locate";
 import AddSong from "./AddSong";
 import { Card, Button, ButtonGroup } from "react-bootstrap";
 import { AiFillHome } from "react-icons/ai";
+import { ImShuffle } from "react-icons/im";
+import { BsMusicPlayerFill } from "react-icons/bs";
 import Sidebar from "../components/Sidebar.js";
 
 import { useRecoilValue } from "recoil";
@@ -97,6 +99,7 @@ function Map() {
     <>
       <ButtonGroup style={buttonStyle}>
         <Button
+          variant="dark"
           onClick={() => {
             mapRef.current?.panTo(center);
             mapRef.current?.setZoom(5);
@@ -114,15 +117,41 @@ function Map() {
             setSelectedIcon(null);
           }}
         />
+        <Button
+          variant="dark"
+          onClick={() => {
+            if (songs.length > 0) {
+              let randomSong = songs[Math.floor(Math.random() * songs.length)];
+              setSelectedIcon(randomSong);
+              mapRef.current?.panTo({
+                lat: randomSong.lat,
+                lng: randomSong.lng,
+              });
+              mapRef.current?.setZoom(14);
+            }
+          }}
+          style={{ backgroundColor: "#ff385c", borderColor: "#ff385c" }}
+        >
+          <ImShuffle />
+        </Button>
         {recoilState.username ? (
           <AddSong addSongToPage={addSongToPage} />
-        ) : null}
+        ) : (
+          <Button
+            variant="dark"
+            style={{ backgroundColor: "#ff385c", borderColor: "#ff385c" }}
+            onClick={() => {}}
+            disabled
+          >
+            <BsMusicPlayerFill />
+          </Button>
+        )}
       </ButtonGroup>
       <Places
         setSearch={(position) => {
           setSearch(position);
           mapRef.current?.panTo(position);
-          mapRef.current?.setZoom(10);
+          mapRef.current?.setZoom(14);
           setSelectedIcon(null);
         }}
       />

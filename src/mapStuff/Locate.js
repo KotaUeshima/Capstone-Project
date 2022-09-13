@@ -5,6 +5,7 @@ import { FaLocationArrow } from "react-icons/fa";
 function Locate({ setSearch }) {
   return (
     <Button
+      variant="dark"
       style={{ backgroundColor: "#ff385c", borderColor: "#ff385c" }}
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
