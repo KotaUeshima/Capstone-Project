@@ -72,7 +72,16 @@ function AddSong({ addSongToPage }) {
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Song To Current Location</Modal.Title>
+          <Modal.Title
+            style={{
+              color: "#212529",
+              fontSize: "2rem",
+              fontWeight: "700",
+              marginLeft: "30%",
+            }}
+          >
+            Share Song
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Spotify selectTrack={selectTrack} />
@@ -81,7 +90,14 @@ function AddSong({ addSongToPage }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={submitSong}>
+          <Button
+            style={{
+              backgroundColor: "#ff385c",
+              borderColor: "#ff385c",
+              fontWeight: "600",
+            }}
+            onClick={submitSong}
+          >
             Confirm
           </Button>
         </Modal.Footer>

@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../components/atoms";
 import { useNavigate, Link } from "react-router-dom";
+import NewUpdates from "../components/NewUpdates.js";
 import URL from "../components/URL.js";
 
 function Login() {
@@ -75,23 +76,43 @@ function Login() {
   }
 
   const backgroundImage =
-    "https://media.istockphoto.com/photos/network-connections-world-map-polygon-graphic-background-with-lines-picture-id1192803561?b=1&k=20&m=1192803561&s=612x612&w=0&h=bkx9X7Mz2-Mi_sWe_8_PeTOCluTJrm7umhqwyYYsHYw=";
+    "https://img.freepik.com/free-vector/realistic-white-golden-geometric-background_79603-2032.jpg?w=2000";
 
   return (
     <div
       style={{
-        minHeight: "94vh",
+        minHeight: "90vh",
         width: "100vw",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         position: "absolute",
-        top: "3.5rem",
+        top: "5rem",
       }}
     >
       <Container>
         <Row className="mt-5">
-          <Col sm={7} className="p-5 m-auto shadow-sm rounded-lg">
-            <div></div>
+          <Col sm={6} style={{ zIndex: "10", backgroundColor: "#212529" }}>
+            <h1
+              style={{ color: "white", fontSize: "3rem", fontWeight: "700" }}
+              className="mt-5 p-2 text-center rounded"
+            >
+              What's In Store Next?
+            </h1>
+            <p className="text-center text-white">
+              Here is what our developers are working on for the next update!
+            </p>
+            <div
+              style={{
+                width: "30vw",
+                margin: "auto",
+                border: "0.25rem solid #ff385c",
+              }}
+            >
+              <NewUpdates />
+            </div>
+          </Col>
+          <Col sm={1}>
+            <></>
           </Col>
           <Col
             sm={5}
@@ -99,8 +120,8 @@ function Login() {
             className="p-5 m-auto shadow-sm rounded-lg"
           >
             <h1
-              style={{ color: "#ff385c", fontSize: "3rem", fontWeight: "600" }}
-              className="mt-3 p-3 text-center rounded"
+              style={{ color: "#ff385c", fontSize: "3rem", fontWeight: "700" }}
+              className="mt-2 p-3 text-center rounded"
             >
               Login
             </h1>
@@ -163,7 +184,8 @@ function Login() {
               Don't have an account?
               <Link
                 style={{ padding: "5px", color: "#ff385c" }}
-                to="/create_account"
+                to="/"
+                state={{ from: "moveDown" }}
               >
                 Create Account
               </Link>

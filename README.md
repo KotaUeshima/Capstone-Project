@@ -1,20 +1,10 @@
-Things to do:
-
-- deck.gl with scatter points, on a global scale should be just a bunch of dots, show different concentraions by cities, either find data, or just focus some lat and lng in cities, when you zoom in, dots should get gradually bigger, otherwise too small when zoomed in so figure out sizing, need to figure out updating it when you add a song, just focus on the US for now as sample data, limit a user from uploading from same location
-
-- add second part to landing page (need to figure out design)
-- have rotating globe on landing page
-- random song button (click to find random song)
-- counter banner of number of users and posts
-- playlist by country? (stretch)
-
 NPM INSTALLS
 
 npm i -S @react-google-maps/api
 
 npm install --save use-places-autocomplete
 
-npm install @reach/combobox
+npm install @reach/comboboxp
 
 npm install react-bootstrap bootstrap
 

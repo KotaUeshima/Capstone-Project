@@ -16,19 +16,18 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
 
 import { GoogleMapsOverlay } from "@deck.gl/google-maps";
-import { Scatterplot } from "@deck.gl/layers";
 import { ScatterplotLayer } from "deck.gl";
 
 import URL from "../components/URL.js";
 
 const containerStyle = {
   width: "100vw",
-  height: "93vh",
+  height: "90vh",
 };
 
 const buttonStyle = {
   position: "absolute",
-  top: "4rem",
+  top: "6rem",
   left: "1rem",
   zIndex: "10",
 };
@@ -47,30 +46,19 @@ function Map() {
   const [search, setSearch] = useState();
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [songs, setSongs] = useState([]);
-  const [refresh, setRefresh] = useState(null);
-
-  // used to try to get markers to render on first time and re-renders, not sure if neccesary
-  const [renderMarker, setRenderMarker] = useState(null);
 
   useEffect(() => {
     fetch(`${URL}/songs`)
       .then((res) => res.json())
       .then(setSongs);
-    // setRenderMarker(true);
   }, []);
 
   const mapRef = useRef(/** @type google.maps.GoogleMap */);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
-  // if (songs.length == 0) {
-  //   return <div>Loading...</div>;
-  // } else {
-  //   createLayer();
-  // }
-  createLayer();
-
   function addSongToPage(data, location) {
     setSongs((songs) => [...songs, data]);
+    setSelectedIcon(data);
     mapRef.current?.panTo(location);
     mapRef.current?.setZoom(14);
   }
@@ -81,32 +69,29 @@ function Map() {
     setSelectedIcon(song);
   }
 
-  function createLayer() {
-    const scatter = () =>
-      new ScatterplotLayer({
-        id: "scatter",
-        data: songs,
-        getPosition: (d) => [d.lng, d.lat],
-        getFillColor: () => [255, 56, 92],
-        getLineColor: () => [255, 56, 92],
-        pickable: true,
-        opacity: 0.8,
-        stroked: true,
-        filled: true,
-        radiusUnit: "common",
-        radiusScale: 10,
-        radiusMinPixels: 1,
-        radiusMaxPixels: 100,
-        lineWidthMinPixels: 1,
-        onClick: ({ object }) => {
-          setSelectedIcon(object);
-        },
-      });
-    const overlay = new GoogleMapsOverlay({
-      layers: [scatter()],
+  const scatter = () =>
+    new ScatterplotLayer({
+      id: "scatter",
+      data: songs,
+      getPosition: (d) => [d.lng, d.lat],
+      getFillColor: () => [255, 56, 92],
+      getLineColor: () => [255, 56, 92],
+      pickable: true,
+      opacity: 0.8,
+      stroked: true,
+      filled: true,
+      radiusUnit: "common",
+      radiusScale: 500,
+      radiusMinPixels: 1,
+      radiusMaxPixels: 20,
+      onClick: ({ object }) => {
+        setSelectedIcon(object);
+      },
     });
-    overlay.setMap(mapRef.current);
-  }
+  const overlay = new GoogleMapsOverlay({
+    layers: [scatter()],
+  });
+  overlay.setMap(mapRef.current);
 
   return (
     <>
@@ -153,7 +138,42 @@ function Map() {
         onLoad={onLoad}
         onClick={() => setSelectedIcon(null)}
       >
-        {/* {renderMarker && (
+        {selectedIcon && (
+          <InfoWindow
+            position={{ lat: selectedIcon.lat, lng: selectedIcon.lng }}
+            onCloseClick={() => {
+              setSelectedIcon(null);
+            }}
+          >
+            <Card>
+              <Card.Body>
+                <Card.Text>
+                  {selectedIcon.title} - {selectedIcon.artist}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </InfoWindow>
+        )}
+      </GoogleMap>
+      {selectedIcon && (
+        <iframe
+          style={spotifyPlayStyle}
+          src={selectedIcon.spotify_url}
+          width="30%"
+          height="20%"
+          frameBorder="2"
+          allowfullscreen="true"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        ></iframe>
+      )}
+      <Sidebar goToSelectedSong={goToSelectedSong} />
+    </>
+  );
+}
+
+export default Map;
+
+/* {renderMarker && (
           <>
             <MarkerClusterer>
               {(clusterer) =>
@@ -180,41 +200,4 @@ function Map() {
               }
             </MarkerClusterer>
           </>
-        )} */}
-        {selectedIcon && (
-          <InfoWindow
-            position={{ lat: selectedIcon.lat, lng: selectedIcon.lng }}
-            onCloseClick={() => {
-              setSelectedIcon(null);
-            }}
-          >
-            <>
-              <Card>
-                {/* <Card.Img variant="top" src={selectedIcon.image_url} /> */}
-                <Card.Body>
-                  <Card.Text>
-                    {selectedIcon.title} - {selectedIcon.artist}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </>
-          </InfoWindow>
-        )}
-      </GoogleMap>
-      {selectedIcon && (
-        <iframe
-          style={spotifyPlayStyle}
-          src={selectedIcon.spotify_url}
-          width="30%"
-          height="20%"
-          frameBorder="2"
-          allowfullscreen="true"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        ></iframe>
-      )}
-      <Sidebar goToSelectedSong={goToSelectedSong} />
-    </>
-  );
-}
-
-export default Map;
+        )} */

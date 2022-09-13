@@ -16,7 +16,6 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/map" element={<MapLoadFile />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create_account" element={<CreateAccount />} />
       </Routes>
     </BrowserRouter>
   );

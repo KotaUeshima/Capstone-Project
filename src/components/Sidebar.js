@@ -35,11 +35,11 @@ function Sidebar({ goToSelectedSong }) {
         <div
           style={{
             display: "flex",
-            height: "93vh",
+            height: "90vh",
             zIndex: "10",
             position: "absolute",
             right: "0",
-            top: "3.5rem",
+            top: "4.8rem",
             overflow: "scroll initial",
           }}
         >

@@ -28,9 +28,16 @@ function NavBar() {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg" style={{ height: "10vh" }}>
         <Container>
           <Navbar.Brand as={Link} to="/">
+            <img
+              alt=""
+              src="https://thumbs.dreamstime.com/b/globe-icon-black-background-graphic-web-design-modern-simple-vector-sign-internet-concept-trendy-symbol-website-button-137473493.jpg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{" "}
             Globify
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -50,28 +57,31 @@ function NavBar() {
                 id="basic-nav-dropdown"
               >
                 {recoilState.username ? (
-                  <NavDropdown.Item
-                    style={{ textAlign: "right" }}
-                    onClick={handleLogout}
-                  >
+                  <NavDropdown.Item onClick={handleLogout}>
                     Logout
                   </NavDropdown.Item>
                 ) : (
-                  <NavDropdown.Item
-                    style={{ textAlign: "right" }}
-                    as={Link}
-                    to="/login"
-                  >
-                    Login
-                  </NavDropdown.Item>
+                  <>
+                    <NavDropdown.Item as={Link} to="/login">
+                      Login
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/"
+                      state={{ from: "moveDown" }}
+                    >
+                      Create Account
+                    </NavDropdown.Item>
+                  </>
                 )}
                 {recoilState.username && window.location.pathname == "/map" ? (
-                  <NavDropdown.Item
-                    style={{ textAlign: "right" }}
-                    onClick={() => setShow(true)}
-                  >
-                    My Songs
-                  </NavDropdown.Item>
+                  <>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item onClick={() => setShow(true)}>
+                      My Songs
+                    </NavDropdown.Item>
+                  </>
                 ) : null}
               </NavDropdown>
             </Nav>

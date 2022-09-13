@@ -74,8 +74,12 @@ function Spotify({ selectTrack }) {
             onChange={(event) => {
               setSearchInput(event.target.value);
             }}
+            style={{ boxShadow: "none" }}
           />
-          <Button onClick={search}>
+          <Button
+            style={{ backgroundColor: "#ff385c", boxShadow: "none" }}
+            onClick={search}
+          >
             <FaSearch />
           </Button>
         </InputGroup>
