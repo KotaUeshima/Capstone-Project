@@ -122,6 +122,7 @@ function CreateAccount() {
             </Form.Group>
 
             <Button
+              variant="dark"
               className="mt-3"
               type="submit"
               style={{

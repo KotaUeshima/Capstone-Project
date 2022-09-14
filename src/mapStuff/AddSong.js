@@ -92,6 +92,7 @@ function AddSong({ addSongToPage }) {
             Close
           </Button>
           <Button
+            variant="dark"
             style={{
               backgroundColor: "#ff385c",
               borderColor: "#ff385c",

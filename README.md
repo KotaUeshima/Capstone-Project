@@ -1,3 +1,8 @@
+What to do before presentation:
+
+Fix my songs
+Loading page for map just based on a timer for now
+
 NPM INSTALLS
 
 npm i -S @react-google-maps/api

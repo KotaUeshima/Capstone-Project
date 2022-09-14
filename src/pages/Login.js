@@ -105,7 +105,7 @@ function Login() {
               style={{
                 width: "30vw",
                 margin: "auto",
-                border: "0.25rem solid #ff385c",
+                border: "0.10rem solid #ff385c",
               }}
             >
               <NewUpdates />
@@ -120,7 +120,7 @@ function Login() {
             className="p-5 m-auto shadow-sm rounded-lg"
           >
             <h1
-              style={{ color: "#ff385c", fontSize: "3rem", fontWeight: "700" }}
+              style={{ color: "white", fontSize: "3rem", fontWeight: "700" }}
               className="mt-2 p-3 text-center rounded"
             >
               Login
@@ -168,6 +168,7 @@ function Login() {
               </Form.Group>
 
               <Button
+                variant="dark"
                 className="mt-3"
                 type="submit"
                 style={{

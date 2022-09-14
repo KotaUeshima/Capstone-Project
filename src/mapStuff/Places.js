@@ -10,6 +10,10 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
+import { MdClear } from "react-icons/md";
+import { GrClear } from "react-icons/gr";
+import { Button } from "react-bootstrap";
+
 import "@reach/combobox/styles.css";
 
 const boxStyle = {
@@ -63,6 +67,19 @@ function Places({ setSearch }) {
             ))}
         </ComboboxList>
       </ComboboxPopover>
+      <button
+        variant="dark"
+        style={{
+          padding: "0.5rem",
+          backgroundColor: "#ff385c",
+          borderColor: "#ff385c",
+        }}
+        onClick={() => {
+          setValue("");
+        }}
+      >
+        <GrClear />
+      </button>
     </Combobox>
   );
 }

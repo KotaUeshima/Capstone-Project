@@ -30,23 +30,16 @@ function NavBar() {
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" style={{ height: "10vh" }}>
         <Container>
-          <Navbar.Brand as={Link} to="/">
-            <img
-              alt=""
-              src="https://thumbs.dreamstime.com/b/globe-icon-black-background-graphic-web-design-modern-simple-vector-sign-internet-concept-trendy-symbol-website-button-137473493.jpg"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{" "}
+          <Navbar.Brand style={{ fontWeight: "700" }} as={Link} to="/">
             Globify
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justfy-content-start">
-              <Nav.Link as={Link} to="/">
+              <Nav.Link style={{ fontWeight: "600" }} as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/map">
+              <Nav.Link style={{ fontWeight: "600" }} as={Link} to="/map">
                 Map
               </Nav.Link>
             </Nav>

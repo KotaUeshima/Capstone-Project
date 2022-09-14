@@ -26,8 +26,7 @@ function Sidebar({ goToSelectedSong }) {
         console.log(`Could not find my songs`);
       }
     });
-    setShow(false);
-  }, []);
+  }, [show]);
 
   return (
     <>

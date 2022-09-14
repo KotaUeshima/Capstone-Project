@@ -30,9 +30,9 @@ function NewUpdates() {
               style={{ objectFit: "cover" }}
               height="375vh"
             />
-            <Carousel.Caption>
+            {/* <Carousel.Caption>
               <p style={{ color: "white" }}>{item.subtitle}</p>
-            </Carousel.Caption>
+            </Carousel.Caption> */}
           </Carousel.Item>
         );
       })}

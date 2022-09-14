@@ -48,6 +48,7 @@ function Landing() {
             <div>
               <Link to="/map">
                 <Button
+                  variant="dark"
                   style={{
                     backgroundColor: "#ff385c",
                     borderColor: "#ff385c",
@@ -74,6 +75,7 @@ function Landing() {
               ) : (
                 <Link to="/login">
                   <Button
+                    variant="dark"
                     className="m-3"
                     style={{
                       backgroundColor: "#ff385c",
