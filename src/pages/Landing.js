@@ -1,14 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Container, Button, Image } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
 import CreateAccount from "./CreateAccount";
 import SpinningGlobe from "../components/SpinningGlobe";
+import URL from "../components/URL.js";
 
 function Landing() {
   const recoilState = useRecoilValue(userState);
   const toCreateAccount = useRef(null);
+  const [count, setCount] = useState({});
 
   const location = useLocation();
 
@@ -21,11 +23,48 @@ function Landing() {
     }
   });
 
+  useEffect(() => {
+    fetch(`${URL}/count`)
+      .then((res) => res.json())
+      .then(setCount);
+  }, []);
+
   return (
     <div>
       <div
         style={{
-          height: "90vh",
+          height: "9vh",
+          backgroundColor: "#212529",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div>
+          {recoilState.username ? (
+            <h2 style={{ color: "white", fontWeight: "600", fontSize: "2rem" }}>
+              Welcome{" "}
+              <span style={{ color: "#ff385c" }}>{recoilState.username}</span>!
+            </h2>
+          ) : (
+            <>
+              <h2
+                style={{ color: "white", fontWeight: "600", fontSize: "2rem" }}
+              >
+                Join <span style={{ color: "#ff385c" }}>{count.user}</span>{" "}
+                other users worldwide!
+              </h2>
+              <p className="text-center" style={{ color: "white" }}>
+                Add to our growing collection of{" "}
+                <span style={{ color: "#ff385c" }}>{count.song}</span> songs.
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+      <div
+        style={{
+          height: "81vh",
           display: "flex",
           alignItems: "center",
         }}

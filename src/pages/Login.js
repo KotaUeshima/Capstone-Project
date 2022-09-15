@@ -94,11 +94,11 @@ function Login() {
           <Col sm={6} style={{ zIndex: "10", backgroundColor: "#212529" }}>
             <h1
               style={{ color: "white", fontSize: "3rem", fontWeight: "700" }}
-              className="mt-5 p-2 text-center rounded"
+              className="mt-5 text-center"
             >
               What's In Store Next?
             </h1>
-            <p className="text-center text-white">
+            <p className="mb-4 text-center text-white">
               Here is what our developers are working on for the next update!
             </p>
             <div

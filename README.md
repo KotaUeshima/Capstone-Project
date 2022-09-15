@@ -1,7 +1,9 @@
-What to do before presentation:
+LAST DAY GRIND!
 
-Fix my songs
-Loading page for map just based on a timer for now
+- change font
+- figure out presenting materials
+- record
+- try to redeploy
 
 NPM INSTALLS
 
@@ -17,7 +19,7 @@ npm install react-router-dom
 
 npm install react-icons --save
 
-npm install --save react-map-gl mapbox-gl
+<!-- npm install --save react-map-gl mapbox-gl -->
 
 npm install deck.gl
 
@@ -26,6 +28,8 @@ npm install react-bootstrap-sidebar-menu
 npm install three @react-three/fiber
 
 npm install @react-three/drei
+
+npm install gh-pages --save-dev
 
 if error run: --legacy-peer-deps
 

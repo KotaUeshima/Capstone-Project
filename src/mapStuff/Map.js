@@ -19,6 +19,8 @@ import { userState, showSidebar } from "../components/atoms";
 
 import { GoogleMapsOverlay } from "@deck.gl/google-maps";
 import { ScatterplotLayer } from "deck.gl";
+import { HeatmapLayer } from "@deck.gl/aggregation-layers";
+import { HexagonLayer } from "@deck.gl/aggregation-layers";
 
 import URL from "../components/URL.js";
 
@@ -69,7 +71,7 @@ function Map() {
 
   function goToSelectedSong(song) {
     mapRef.current?.panTo({ lat: song.lat, lng: song.lng });
-    mapRef.current?.setZoom(10);
+    mapRef.current?.setZoom(14);
     setSelectedIcon(song);
   }
 
@@ -95,13 +97,31 @@ function Map() {
         stroked: true,
         filled: true,
         radiusUnit: "common",
-        radiusScale: 500,
+        radiusScale: 400,
         radiusMinPixels: 1,
-        radiusMaxPixels: 20,
+        radiusMaxPixels: 15,
         onClick: ({ object }) => {
           setSelectedIcon(object);
         },
       });
+
+    const hexagon = () =>
+      new HexagonLayer({
+        id: "hex",
+        data: songs,
+        getPosition: (d) => [d.lng, d.lat],
+        getElevationWeight: (d) => d.lat,
+        elevationScale: 100,
+      });
+
+    const heatmap = () =>
+      new HeatmapLayer({
+        id: "heatmap",
+        data: songs,
+        getPosition: (d) => [d.lng, d.lat],
+        radiusPixels: 60,
+      });
+
     const overlay = new GoogleMapsOverlay({
       layers: [scatter()],
     });
