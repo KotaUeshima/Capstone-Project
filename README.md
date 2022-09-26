@@ -1,10 +1,3 @@
-LAST DAY GRIND!
-
-- change font
-- figure out presenting materials
-- record
-- try to redeploy
-
 NPM INSTALLS
 
 npm i -S @react-google-maps/api
