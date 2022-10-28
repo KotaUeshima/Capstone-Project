@@ -1,10 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import {
-  GoogleMap,
-  Marker,
-  MarkerClusterer,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, InfoWindow } from "@react-google-maps/api";
 import Places from "./Places";
 import Locate from "./Locate";
 import AddSong from "./AddSong";
@@ -14,7 +9,7 @@ import { ImShuffle } from "react-icons/im";
 import { BsMusicPlayerFill } from "react-icons/bs";
 import Sidebar from "../components/Sidebar.js";
 
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import { userState, showSidebar } from "../components/atoms";
 
 import { GoogleMapsOverlay } from "@deck.gl/google-maps";
@@ -50,14 +45,16 @@ function Map() {
   const [search, setSearch] = useState();
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [songs, setSongs] = useState([]);
-  const [show, setShow] = useRecoilState(showSidebar);
+  const setShow = useSetRecoilState(showSidebar);
 
   useEffect(() => {
     fetch(`${URL}/songs`)
       .then((res) => res.json())
       .then(setSongs);
     setShow(false);
-  }, []);
+  }, [setShow]);
+
+  if (search === "wzoom") center = { lat: 39.8283, lng: -98.5795 };
 
   const mapRef = useRef(/** @type google.maps.GoogleMap */);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
@@ -105,22 +102,22 @@ function Map() {
         },
       });
 
-    const hexagon = () =>
-      new HexagonLayer({
-        id: "hex",
-        data: songs,
-        getPosition: (d) => [d.lng, d.lat],
-        getElevationWeight: (d) => d.lat,
-        elevationScale: 100,
-      });
+    // const hexagon = () =>
+    //   new HexagonLayer({
+    //     id: "hex",
+    //     data: songs,
+    //     getPosition: (d) => [d.lng, d.lat],
+    //     getElevationWeight: (d) => d.lat,
+    //     elevationScale: 100,
+    //   });
 
-    const heatmap = () =>
-      new HeatmapLayer({
-        id: "heatmap",
-        data: songs,
-        getPosition: (d) => [d.lng, d.lat],
-        radiusPixels: 60,
-      });
+    // const heatmap = () =>
+    //   new HeatmapLayer({
+    //     id: "heatmap",
+    //     data: songs,
+    //     getPosition: (d) => [d.lng, d.lat],
+    //     radiusPixels: 60,
+    //   });
 
     const overlay = new GoogleMapsOverlay({
       layers: [scatter()],
@@ -229,6 +226,7 @@ function Map() {
               src={selectedIcon.spotify_url}
               width="30%"
               height="20%"
+              title="spotifymusic"
               frameBorder="2"
               allowfullscreen="true"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"

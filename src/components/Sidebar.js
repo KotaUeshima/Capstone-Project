@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   CDBSidebar,
   CDBSidebarContent,
-  CDBSidebarFooter,
   CDBSidebarHeader,
   CDBSidebarMenu,
-  CDBSidebarMenuItem,
 } from "cdbreact";
 import { ListGroup } from "react-bootstrap";
 import { useRecoilValue, useRecoilState } from "recoil";
@@ -26,7 +24,7 @@ function Sidebar({ goToSelectedSong }) {
         console.log(`Could not find my songs`);
       }
     });
-  }, [show]);
+  }, [recoilState.id]);
 
   return (
     <>
@@ -61,7 +59,7 @@ function Sidebar({ goToSelectedSong }) {
                         <ListGroup.Item
                           style={{
                             backgroundColor:
-                              song == selectedSongForColor
+                              song === selectedSongForColor
                                 ? "#ff385c"
                                 : "#212529",
                           }}
@@ -69,7 +67,7 @@ function Sidebar({ goToSelectedSong }) {
                           className="d-flex justify-content-between align-items-start p-3"
                           onClick={(e) => {
                             let listItem = e.target;
-                            while (listItem.nodeName != "LI") {
+                            while (listItem.nodeName !== "LI") {
                               listItem = listItem.parentNode;
                             }
                             listItem.style.backgroundColor = "#ff385c";
@@ -82,7 +80,12 @@ function Sidebar({ goToSelectedSong }) {
                             <div className="fw-bold">{song.title}</div>
                             {song.artist}
                           </div>
-                          <img height="20%" width="20%" src={song.image_url} />
+                          <img
+                            height="20%"
+                            alt="whatever"
+                            width="20%"
+                            src={song.image_url}
+                          />
                         </ListGroup.Item>
                       );
                     })}

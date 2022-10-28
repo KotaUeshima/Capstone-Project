@@ -1,5 +1,5 @@
-import React, { Suspense, useRef } from "react";
-import { Canvas, useLoader, useFrame } from "@react-three/fiber";
+import React, { useRef } from "react";
+import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { OrbitControls } from "@react-three/drei";
 import EarthSpecularMap from "../2k_earth_specular_map.jpg";

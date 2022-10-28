@@ -4,7 +4,6 @@ import MapLoadFile from "./mapStuff/MapLoadFile";
 import NavBar from "./components/NavBar";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
-import CreateAccount from "./pages/CreateAccount";
 import GetCurrentUser from "./components/GetCurrentUser";
 
 function App() {

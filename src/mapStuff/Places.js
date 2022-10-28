@@ -10,9 +10,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
-import { MdClear } from "react-icons/md";
 import { GrClear } from "react-icons/gr";
-import { Button } from "react-bootstrap";
 
 import "@reach/combobox/styles.css";
 
@@ -61,7 +59,7 @@ function Places({ setSearch }) {
       />
       <ComboboxPopover>
         <ComboboxList>
-          {status == "OK" &&
+          {status === "OK" &&
             data.map(({ place_id, description }) => (
               <ComboboxOption key={place_id} value={description} />
             ))}

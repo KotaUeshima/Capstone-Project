@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Container, Button, Image } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { useRecoilValue } from "recoil";
 import { userState } from "../components/atoms";
 import CreateAccount from "./CreateAccount";
@@ -17,7 +17,7 @@ function Landing() {
   useEffect(() => {
     if (location.state) {
       const { from } = location.state;
-      if (from == "moveDown") {
+      if (from === "moveDown") {
         toCreateAccount.current?.scrollIntoView();
       }
     }

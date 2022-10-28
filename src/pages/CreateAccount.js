@@ -55,12 +55,15 @@ function CreateAccount() {
           res.json().then((data) => {
             const validationObj = {};
             data.errors.map((error) => {
-              if (error == "Username has already been taken") {
+              if (error === "Username has already been taken") {
                 validationObj.username = error;
+                return true;
               } else if (!validationObj.password) {
                 validationObj.password = [error];
+                return true;
               } else {
                 validationObj.password = [...validationObj.password, error];
+                return true;
               }
             });
             setErrors(validationObj);

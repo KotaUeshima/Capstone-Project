@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { userState, showSidebar } from "../components/atoms";
 
 import Container from "react-bootstrap/Container";
@@ -11,7 +11,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 function NavBar() {
   const [recoilState, setUserState] = useRecoilState(userState);
-  const [show, setShow] = useRecoilState(showSidebar);
+  const setShow = useSetRecoilState(showSidebar);
   let navigate = useNavigate();
 
   function handleLogout() {
@@ -68,7 +68,7 @@ function NavBar() {
                     </NavDropdown.Item>
                   </>
                 )}
-                {recoilState.username && window.location.pathname == "/map" ? (
+                {recoilState.username && window.location.pathname === "/map" ? (
                   <>
                     <NavDropdown.Divider />
                     <NavDropdown.Item onClick={() => setShow(true)}>

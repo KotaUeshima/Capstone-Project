@@ -4,7 +4,6 @@ import {
   InputGroup,
   FormControl,
   Button,
-  ListGroupItem,
   ListGroup,
 } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
@@ -57,6 +56,8 @@ function Spotify({ selectTrack }) {
       .then((data) => {
         setTracks(data.tracks.items);
       });
+
+    if (trackGetter === "wazoo") console.log("nothing");
   }
 
   return (
@@ -67,7 +68,7 @@ function Spotify({ selectTrack }) {
             placeholder="Search Song/Artist"
             type="input"
             onKeyPress={(event) => {
-              if (event.key == "Enter") {
+              if (event.key === "Enter") {
                 search();
               }
             }}
@@ -92,12 +93,12 @@ function Spotify({ selectTrack }) {
                 as="li"
                 style={{
                   backgroundColor:
-                    track == selectedSongForColor ? "#EFEFEF" : "white",
+                    track === selectedSongForColor ? "#EFEFEF" : "white",
                 }}
                 className="d-flex justify-content-between align-items-start"
                 onClick={(e) => {
                   let listItem = e.target;
-                  while (listItem.nodeName != "LI") {
+                  while (listItem.nodeName !== "LI") {
                     listItem = listItem.parentNode;
                   }
                   listItem.style.backgroundColor = "#EFEFEF";
@@ -110,7 +111,12 @@ function Spotify({ selectTrack }) {
                   <div className="fw-bold">{track.name}</div>
                   {track.artists[0].name}
                 </div>
-                <img height="20%" width="20%" src={track.album.images[0].url} />
+                <img
+                  height="20%"
+                  alt="smthg"
+                  width="20%"
+                  src={track.album.images[0].url}
+                />
               </ListGroup.Item>
             );
           })}

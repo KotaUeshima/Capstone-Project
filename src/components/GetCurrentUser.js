@@ -6,7 +6,6 @@ import URL from "./URL.js";
 
 function GetCurrentUser() {
   const setUserState = useSetRecoilState(userState);
-  const recoilUserState = useRecoilValue(userState);
 
   useEffect(() => {
     fetch(`${URL}/me`, {
@@ -23,7 +22,7 @@ function GetCurrentUser() {
         });
       }
     });
-  }, []);
+  }, [setUserState]);
 
   return <></>;
 }
