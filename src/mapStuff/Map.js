@@ -9,13 +9,13 @@ import { ImShuffle } from "react-icons/im";
 import { BsMusicPlayerFill } from "react-icons/bs";
 import Sidebar from "../components/Sidebar.js";
 
-import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { userState, showSidebar } from "../components/atoms";
 
 import { GoogleMapsOverlay } from "@deck.gl/google-maps";
 import { ScatterplotLayer } from "deck.gl";
-import { HeatmapLayer } from "@deck.gl/aggregation-layers";
-import { HexagonLayer } from "@deck.gl/aggregation-layers";
+// import { HeatmapLayer } from "@deck.gl/aggregation-layers";
+// import { HexagonLayer } from "@deck.gl/aggregation-layers";
 
 import URL from "../components/URL.js";
 
@@ -54,7 +54,7 @@ function Map() {
     setShow(false);
   }, [setShow]);
 
-  if (search === "wzoom") center = { lat: 39.8283, lng: -98.5795 };
+  if (search === "wzoom") console.log("for eslint purposes");
 
   const mapRef = useRef(/** @type google.maps.GoogleMap */);
   const onLoad = useCallback((map) => (mapRef.current = map), []);

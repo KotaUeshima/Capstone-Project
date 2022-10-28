@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { userState } from "./atoms";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 import URL from "./URL.js";
 
