@@ -6,29 +6,21 @@ As a user, you should be able to browse through a global map, where there will b
 
 ## Install
 
-`npm i -S @react-google-maps/api`
-
+```
+npm i -S @react-google-maps/api
 npm install --save use-places-autocomplete
-
 npm install @reach/comboboxp
-
 npm install react-bootstrap bootstrap
-
 npm install react-router-dom
-
 npm install react-icons --save
-
 npm install deck.gl
-
 npm install react-bootstrap-sidebar-menu
-
 npm install three @react-three/fiber
-
 npm install @react-three/drei
-
 npm install gh-pages --save-dev
 
 if error run: --legacy-peer-deps
+```
 
 Deploy Instructions, React on Github Pages
 
