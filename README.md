@@ -22,6 +22,12 @@ npm install gh-pages --save-dev
 if error run: --legacy-peer-deps
 ```
 
+# Backend
+
+[globify-backend](https://github.com/KotaUeshima/globify-backend)
+
+# How to Deploy with Github Pages
+
 Deploy Instructions, React on Github Pages
 
 npm install gh-pages --save-dev
@@ -32,9 +38,3 @@ npm install gh-pages --save-dev
 "deploy": "gh-pages -d build",
 
 then npm run deploy
-
-API:
-
-https://developer.spotify.com/
-
-Project Pitch:
