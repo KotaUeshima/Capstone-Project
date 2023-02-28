@@ -1,6 +1,6 @@
 let URL
 if (process.env.NODE_ENV === 'development') {
-  URL = 'http://localhost:3000'
+  URL = 'https://globify-backend.onrender.com'
 } else {
   URL = 'https://globify-backend.onrender.com'
 }
