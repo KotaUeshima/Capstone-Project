@@ -1,23 +1,23 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { GoogleMap, InfoWindow } from '@react-google-maps/api'
-import Places from './Places'
-import Locate from './Locate'
-import AddSong from './AddSong'
-import { Card, Button, ButtonGroup, Spinner } from 'react-bootstrap'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Button, ButtonGroup, Card, Spinner } from 'react-bootstrap'
 import { AiFillHome } from 'react-icons/ai'
-import { ImShuffle } from 'react-icons/im'
 import { BsMusicPlayerFill } from 'react-icons/bs'
+import { ImShuffle } from 'react-icons/im'
 import Sidebar from '../components/Sidebar.js'
+import AddSong from './AddSong'
+import Locate from './Locate'
+import Places from './Places'
 
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { userState, showSidebar } from '../components/atoms'
+import { showSidebar, userState } from '../utils/atoms'
 
 import { GoogleMapsOverlay } from '@deck.gl/google-maps'
 import { ScatterplotLayer } from 'deck.gl'
 // import { HeatmapLayer } from "@deck.gl/aggregation-layers";
 // import { HexagonLayer } from "@deck.gl/aggregation-layers";
 
-import URL from '../components/URL.js'
+import URL from '../utils/url.js'
 
 const containerStyle = {
   width: '100vw',
@@ -134,7 +134,10 @@ function Map() {
                 mapRef.current?.setZoom(5)
                 setSelectedIcon(null)
               }}
-              style={{ backgroundColor: '#ff385c', borderColor: '#ff385c' }}
+              style={{
+                backgroundColor: '#ff385c',
+                borderColor: '#ff385c',
+              }}
             >
               <AiFillHome />
             </Button>
@@ -150,7 +153,8 @@ function Map() {
               variant='dark'
               onClick={() => {
                 if (songs.length > 0) {
-                  let randomSong = songs[Math.floor(Math.random() * songs.length)]
+                  let randomSong =
+                    songs[Math.floor(Math.random() * songs.length)]
                   setSelectedIcon(randomSong)
                   mapRef.current?.panTo({
                     lat: randomSong.lat,
@@ -159,14 +163,25 @@ function Map() {
                   mapRef.current?.setZoom(14)
                 }
               }}
-              style={{ backgroundColor: '#ff385c', borderColor: '#ff385c' }}
+              style={{
+                backgroundColor: '#ff385c',
+                borderColor: '#ff385c',
+              }}
             >
               <ImShuffle />
             </Button>
-            {recoilState.username ? (
+            {!recoilState.username ? (
               <AddSong addSongToPage={addSongToPage} />
             ) : (
-              <Button variant='dark' style={{ backgroundColor: '#ff385c', borderColor: '#ff385c' }} onClick={() => {}} disabled>
+              <Button
+                variant='dark'
+                style={{
+                  backgroundColor: '#ff385c',
+                  borderColor: '#ff385c',
+                }}
+                onClick={() => {}}
+                disabled
+              >
                 <BsMusicPlayerFill />
               </Button>
             )}
@@ -205,7 +220,9 @@ function Map() {
                     <Card.Text>
                       {selectedIcon.title} - {selectedIcon.artist}
                     </Card.Text>
-                    <Card.Text>User: {selectedIcon.user.username}</Card.Text>
+                    <Card.Text>
+                      User: {selectedIcon.user.username}
+                    </Card.Text>
                   </Card.Body>
                 </Card>
               </InfoWindow>

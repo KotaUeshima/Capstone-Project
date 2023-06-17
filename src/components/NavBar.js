@@ -1,79 +1,67 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { userState, showSidebar } from "../components/atoms";
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { showSidebar, userState } from '../utils/atoms'
 
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 
 function NavBar() {
-  const [recoilState, setUserState] = useRecoilState(userState);
-  const setShow = useSetRecoilState(showSidebar);
-  let navigate = useNavigate();
+  const [recoilState, setUserState] = useRecoilState(userState)
+  const setShow = useSetRecoilState(showSidebar)
+  let navigate = useNavigate()
 
   function handleLogout() {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token')
     setUserState({
-      username: "",
-      id: "",
-    });
-    navigate("/");
+      username: '',
+      id: '',
+    })
+    navigate('/')
   }
 
   /* <NavDropdown.Divider /> */
-  const dropDownTitle = recoilState.username ? recoilState.username : "Guest";
+  const dropDownTitle = recoilState.username ? recoilState.username : 'Guest'
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" style={{ height: "10vh" }}>
+      <Navbar bg='dark' variant='dark' expand='lg' style={{ height: '10vh' }}>
         <Container>
-          <Navbar.Brand style={{ fontWeight: "700" }} as={Link} to="/">
+          <Navbar.Brand style={{ fontWeight: '700' }} as={Link} to='/'>
             Globify
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="justfy-content-start">
-              <Nav.Link style={{ fontWeight: "600" }} as={Link} to="/">
+          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='justfy-content-start'>
+              <Nav.Link style={{ fontWeight: '600' }} as={Link} to='/'>
                 Home
               </Nav.Link>
-              <Nav.Link style={{ fontWeight: "600" }} as={Link} to="/map">
+              <Nav.Link style={{ fontWeight: '600' }} as={Link} to='/map'>
                 Map
               </Nav.Link>
             </Nav>
-            <Nav className="justify-content-end" style={{ width: "100%" }}>
-              <NavDropdown
-                align="end"
-                title={dropDownTitle}
-                id="basic-nav-dropdown"
-              >
+            <Nav className='justify-content-end' style={{ width: '100%' }}>
+              <NavDropdown align='end' title={dropDownTitle} id='basic-nav-dropdown'>
                 {recoilState.username ? (
-                  <NavDropdown.Item onClick={handleLogout}>
-                    Logout
-                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 ) : (
                   <>
-                    <NavDropdown.Item as={Link} to="/login">
+                    <NavDropdown.Item as={Link} to='/login'>
                       Login
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item
-                      as={Link}
-                      to="/"
-                      state={{ from: "moveDown" }}
-                    >
+                    <NavDropdown.Item as={Link} to='/' state={{ from: 'moveDown' }}>
                       Create Account
                     </NavDropdown.Item>
                   </>
                 )}
-                {recoilState.username && window.location.pathname === "/map" ? (
+                {recoilState.username && window.location.pathname === '/map' ? (
                   <>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={() => setShow(true)}>
-                      My Songs
-                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => setShow(true)}>My Songs</NavDropdown.Item>
                   </>
                 ) : recoilState.username ? (
                   <>
@@ -89,7 +77,7 @@ function NavBar() {
         </Container>
       </Navbar>
     </header>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar
